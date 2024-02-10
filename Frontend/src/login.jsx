@@ -1,20 +1,48 @@
 import React, { useState } from "react";
-import { Form, Button, Container, Col, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Form, Button, Container, Col, Row, Alert } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState(false);
+    const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        // Make API call to handle login (use axios or fetch)
+        try {
+            const response = await fetch("http://localhost:5000/user/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email,
+                    password,
+                }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                console.log("User logged in successfully:", data);
+                localStorage.setItem("token", data.token);
+                navigate("/");
+            } else {
+                console.error("Login failed:", data.error);
+                setError(data.error);
+            }
+        } catch (error) {
+            console.error("Error during login:", error);
+            setError(error);
+        }
     };
 
     return (
         <Container>
             <Row className="justify-content-center">
                 <Col md="4" className="py-5">
+                    {error && <Alert variant="danger">{error}.</Alert>}
                     <Form onSubmit={handleLogin}>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>

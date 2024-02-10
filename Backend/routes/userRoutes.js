@@ -50,9 +50,6 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-    // Implement user login logic here
-
-    // For example:
     const { email, password } = req.body;
 
     try {
@@ -71,8 +68,7 @@ router.post("/login", async (req, res) => {
         // Create and sign a JWT for authentication
         const token = jwt.sign(
             { userId: user._id, email: user.email },
-            "yourSecretKey", // Change this to a secret key for production
-            { expiresIn: "1h" } // Token expires in 1 hour
+            "loas9(@(8hlhasf(((n23hlknha*nnaonouiasd*(723988BIAUDHF"
         );
 
         res.status(200).json({ message: "User logged in successfully", token });

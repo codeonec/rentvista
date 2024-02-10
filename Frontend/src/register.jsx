@@ -1,20 +1,24 @@
 // RegisterForm.js
 import React, { useState } from "react";
-import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { Form, Button, Container, Row, Col, Alert } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [accountType, setAccountType] = useState("traveler");
+    const [accountType, setAccountType] = useState("Traveler");
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
+    const [success, setSuccess] = useState(false);
+    const [error, setError] = useState("");
+    const navigate = useNavigate();
 
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
             const response = await fetch(
-                "https://localhost:5000/user/register",
+                "http://localhost:5000/user/register",
                 {
                     method: "POST",
                     headers: {
@@ -34,14 +38,17 @@ const RegisterForm = () => {
 
             if (response.ok) {
                 console.log("User registered successfully:", data);
-                // Optionally, you can redirect the user to a login page or handle the success in some way
+                setSuccess(true);
+                setTimeout(() => {
+                    navigate("/login");
+                }, 2000);
             } else {
                 console.error("Registration failed:", data.error);
-                // Handle registration failure, display an error message, etc.
+                setError(data.error);
             }
         } catch (error) {
             console.error("Error during registration:", error);
-            // Handle unexpected errors
+            setError("An Error Occurred");
         }
     };
 
@@ -49,6 +56,12 @@ const RegisterForm = () => {
         <Container className="py-5">
             <Row className="justify-content-center">
                 <Col md="4">
+                    {success && (
+                        <Alert variant="success">
+                            Registration Successful. Redirect in 2 seconds.
+                        </Alert>
+                    )}
+                    {error && <Alert variant="danger">{error}.</Alert>}
                     <Form onSubmit={handleRegister}>
                         <Form.Group controlId="formBasicUsername">
                             <Form.Label>Username</Form.Label>
@@ -117,10 +130,10 @@ const RegisterForm = () => {
                                 value={accountType}
                                 onChange={(e) => setAccountType(e.target.value)}
                             >
-                                <option value="propertyOwner">
+                                <option value="Property Owner">
                                     Property Owner
                                 </option>
-                                <option value="traveler">Traveler</option>
+                                <option value="Traveler">Traveler</option>
                             </Form.Control>
                         </Form.Group>
 

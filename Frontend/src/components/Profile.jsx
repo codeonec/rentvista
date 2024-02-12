@@ -39,7 +39,7 @@ const Profile = () => {
                         <p>Name: {profileData.name}</p>
                     </div>
                 ) : (
-                    <p>Loading...</p>
+                    <p>Welcome ...</p>
                 )}
             </Container>
         </>

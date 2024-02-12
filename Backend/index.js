@@ -11,17 +11,18 @@ app.use(express.json());
 
 app.use("/user", userRoutes);
 
-mongoose
-    .connect(
-        "mongodb+srv://rpatel0083:UrbanNest1@urbannest.3gm8btz.mongodb.net/?retryWrites=true&w=majority",
-        {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        }
-    )
-    .then(() => console.log("Connected to MongoDB"))
-    .catch((err) => console.error("Error connecting to MongoDB", err));
+// const URI = "mongodb+srv://rpatel0083:UrbanNest1@urbannest.3gm8btz.mongodb.net/?retryWrites=true&w=majority"; 
+const URI = "mongodb+srv://hrshmistry:Conestoga8670@cluster0.rupceib.mongodb.net/UrbanNestDB?retryWrites=true&w=majority";
+
+const OPTIONS = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}
+
+mongoose.connect(URI, OPTIONS)
+    .then(() => console.log("Connected to MongoDB!"))
+    .catch((err) => console.error("Error connecting to MongoDB!", err));
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`\nServer is running on http://localhost:${PORT}/\n`);
 });

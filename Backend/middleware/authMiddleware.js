@@ -3,6 +3,8 @@ const jwt = require("jsonwebtoken");
 const authMiddleware = (req, res, next) => {
     const token = req.header("Authorization");
 
+    console.log(token);
+
     if (!token) {
         return res
             .status(401)
@@ -16,6 +18,8 @@ const authMiddleware = (req, res, next) => {
         );
 
         req.user = decoded;
+
+        console.log("decoded token: ", decoded);
 
         next();
     } catch (error) {

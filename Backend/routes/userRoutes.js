@@ -2,6 +2,7 @@ const express = require("express");
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const authMiddleware = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
@@ -65,7 +66,6 @@ router.post("/login", async (req, res) => {
             return res.status(401).json({ error: "Invalid email or password" });
         }
 
-        // Create and sign a JWT for authentication
         const token = jwt.sign(
             { userId: user._id, email: user.email },
             "loas9(@(8hlhasf(((n23hlknha*nnaonouiasd*(723988BIAUDHF"
@@ -75,6 +75,20 @@ router.post("/login", async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+router.get("/auth", authMiddleware, async (req, res) => {
+    try {
+        console.log("req.user: ", req.user);
+        const userId = req.user.userId;
+
+        const user = await User.findById(userId);
+
+        res.json({ user });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: "Internal Server Error" });
     }
 });
 

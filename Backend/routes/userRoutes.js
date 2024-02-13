@@ -68,7 +68,7 @@ router.post("/login", async (req, res) => {
 
         const token = jwt.sign(
             { userId: user._id, email: user.email },
-            "loas9(@(8hlhasf(((n23hlknha*nnaonouiasd*(723988BIAUDHF"
+            "urbannestjwttoken"
         );
 
         res.status(200).json({ message: "User logged in successfully", token });

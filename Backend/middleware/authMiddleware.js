@@ -15,7 +15,7 @@ const authMiddleware = (req, res, next) => {
         token
         const decoded = jwt.verify(
             token,
-            "urbannest"
+            "urbannestjwttoken"
         );
 
         req.user = decoded;

@@ -1,9 +1,9 @@
 const jwt = require("jsonwebtoken");
 
 const authMiddleware = (req, res, next) => {
-    const token = req.header("Authorization");
+    let token = req.headers["authorization"];
 
-    console.log(token);
+    token = token.split(' ')[1];
 
     if (!token) {
         return res
@@ -12,14 +12,13 @@ const authMiddleware = (req, res, next) => {
     }
 
     try {
+        token
         const decoded = jwt.verify(
             token,
-            "loas9(@(8hlhasf(((n23hlknha*nnaonouiasd*(723988BIAUDHF"
+            "urbannest"
         );
 
         req.user = decoded;
-
-        console.log("decoded token: ", decoded);
 
         next();
     } catch (error) {

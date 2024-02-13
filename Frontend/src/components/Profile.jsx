@@ -5,12 +5,13 @@ const Profile = () => {
     const [profileData, setProfileData] = useState(null);
 
     useEffect(() => {
-        const token = localStorage.getItem("token");
+        const token = JSON.parse(localStorage.getItem("token"));
+
         if (token) {
             fetch("http://localhost:5000/user/auth", {
                 method: "GET",
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    authorization: `Bearer ${token}`,
                     "Content-Type": "application/json",
                 },
             })
@@ -22,7 +23,8 @@ const Profile = () => {
                     }
                 })
                 .then((data) => {
-                    setProfileData(data);
+                    console.log({ data });
+                    setProfileData(data.user);
                 })
                 .catch((error) => {
                     console.error("Error:", error);
@@ -36,12 +38,16 @@ const Profile = () => {
                 <h5 className="my-4">Profile</h5>
                 {profileData ? (
                     <div>
-                        <p>Name: {profileData.name}</p>
+                        <p><b>Username:</b> {profileData.username}</p>
+                        <p><b>Name:</b> {profileData.firstname} {profileData.lastname}</p>
+                        <p><b>Email:</b> {profileData.email}</p>
+                        <p><b>Account Type:</b> {profileData.accountType}</p>
                     </div>
                 ) : (
-                    <p>Welcome ...</p>
+                    <p>Welcome Guest, Please LOGIN!</p>
                 )}
             </Container>
+
         </>
     );
 }

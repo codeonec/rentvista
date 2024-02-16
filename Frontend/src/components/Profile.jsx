@@ -8,7 +8,7 @@ const Profile = () => {
         const token = JSON.parse(localStorage.getItem("token"));
 
         if (token) {
-            fetch("http://localhost:5000/user/auth", {
+            fetch("http://localhost:5000/user/auth/profile", {
                 method: "GET",
                 headers: {
                     authorization: `Bearer ${token}`,

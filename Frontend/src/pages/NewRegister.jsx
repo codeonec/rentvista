@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import { Alert, Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { Link, Navigate } from 'react-router-dom';
-import { registrationSchema } from './utils/formSchemas/registrationSchema';
+import { registrationSchema } from '../utils/formSchemas/registrationSchema';
 import { z } from 'zod';
 import { useState } from 'react';
 

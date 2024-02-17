@@ -1,13 +1,12 @@
-import NavBar from "./components/navbar";
+import NavBar from "./components/Navbar";
 import { Route, Routes } from "react-router-dom";
-import Home from "./home";
-import Login from "./login";
-import RegisterForm from "./register";
-import Profile from "./components/Profile";
-import Properties from "./components/Properties";
-import Services from "./components/Services";
-import ContactUs from "./components/ContactUs";
-import NewRegister from "./NewRegister";
+import Login from "./pages/Login";
+import Profile from "./pages/Profile";
+import Properties from "./pages/Properties";
+import Services from "./pages/Services";
+import ContactUs from "./pages/ContactUs";
+import NewRegister from "./pages/NewRegister";
+import Home from "./pages/Home";
 
 function App() {
     return (

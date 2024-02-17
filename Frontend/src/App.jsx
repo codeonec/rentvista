@@ -7,6 +7,7 @@ import Profile from "./components/Profile";
 import Properties from "./components/Properties";
 import Services from "./components/Services";
 import ContactUs from "./components/ContactUs";
+import NewRegister from "./NewRegister";
 
 function App() {
     return (
@@ -15,7 +16,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<RegisterForm />} />
+                <Route path="/register" element={<NewRegister />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/properties" element={<Properties />} />
                 <Route path="/services" element={<Services />} />

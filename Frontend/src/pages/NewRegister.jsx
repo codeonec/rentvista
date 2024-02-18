@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import { Alert, Button, Col, Container, Form, Row } from 'react-bootstrap';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { registrationSchema } from '../utils/formSchemas/registrationSchema';
 import { z } from 'zod';
 import { useState } from 'react';
@@ -8,6 +8,7 @@ import { useState } from 'react';
 const NewRegister = () => {
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState("");
+    const navigate = useNavigate();
 
     const registerUser = async (values) => {
         try {
@@ -28,7 +29,7 @@ const NewRegister = () => {
                 setSuccess(true);
                 formik.resetForm();
                 setTimeout(() => {
-                    Navigate("/login");
+                    navigate("/login");
                 }, 2000);
             } else {
                 console.error("Registration failed:", data.error);
@@ -57,13 +58,12 @@ const NewRegister = () => {
                 registrationSchema.parse(values);
             } catch (error) {
                 if (error instanceof z.ZodError) {
-                    console.error("Validation failed:", error.formErrors.fieldErrors);
                     return error.formErrors.fieldErrors;
                 }
             }
         }
 
-    })
+    });
 
     return (
         <Container className="py-5">
@@ -72,7 +72,6 @@ const NewRegister = () => {
                     {success && (
                         <Alert variant="success">
                             Registration Successful.
-                            {/* Redirect in 2 seconds. */}
                         </Alert>
                     )}
                     {error && <Alert variant="danger">{error}.</Alert>}

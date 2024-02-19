@@ -34,18 +34,41 @@ const Profile = () => {
         }
     }, []);
 
+    const getGreeting = () => {
+        const currentDate = new Date();
+        const currentHour = currentDate.getHours();
+
+        if (currentHour < 12) {
+            return 'Good morning';
+        } else if (currentHour < 18) {
+            return 'Good afternoon';
+        } else {
+            return 'Good evening';
+        }
+    };
+
     return (
         <>
             <Container>
-                <h5 className="my-4">Profile</h5>
                 {jwtToken ?
                     profileData ?
-                        <div>
-                            <p><b>Username:</b> {profileData.username}</p>
-                            <p><b>Name:</b> {profileData.firstname} {profileData.lastname}</p>
-                            <p><b>Email:</b> {profileData.email}</p>
-                            <p><b>Account Type:</b> {profileData.accountType}</p>
-                        </div>
+                        <>
+                            <h2 className="my-4">{getGreeting()}, {profileData.username}!</h2>
+                            <div className="d-flex align-items-center gap-4">
+                                <div>
+                                    <p><b>Username:</b> {profileData.username}</p>
+                                    <p><b>Name:</b> {profileData.firstname} {profileData.lastname}</p>
+                                    <p><b>Email:</b> {profileData.email}</p>
+                                    <p><b>Account Type:</b> {profileData.accountType}</p>
+                                </div>
+                                <img
+                                    className="rounded-circle mx-5"
+                                    src={"http://localhost:5000" + profileData.profilePicture}
+                                    alt="user"
+                                    style={{ width: "200px" }}
+                                />
+                            </div>
+                        </>
                         : <p>Loading...</p>
                     : <p>Welcome Guest, Please LOGIN!</p>}
             </Container>

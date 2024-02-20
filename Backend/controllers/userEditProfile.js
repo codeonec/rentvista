@@ -1,9 +1,16 @@
 const User = require("../models/User");
 
-const userProfile = async (req, res) => {
+const userEditProfile = async (req, res) => {
     try {
         const userId = req.user.userId;
         const user = await User.findById(userId);
+
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        Object.assign(user, req.body);
+        await user.save();
 
         res.json({ user });
     } catch (error) {
@@ -12,4 +19,4 @@ const userProfile = async (req, res) => {
     }
 }
 
-module.exports = { userProfile }
+module.exports = { userEditProfile }

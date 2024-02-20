@@ -45,7 +45,7 @@ const Profile = () => {
     }
 
     const saveProfile = () => {
-        if (profileData === originalData) {
+        if (profileData !== originalData) {
             try {
                 if (jwtToken) {
                     fetch(`http://localhost:5000/user/auth/edit-profile`, {

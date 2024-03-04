@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import Loading from "../components/Loading";
 import ProfileLabel from "../components/ProfileLabel";
 import { Button, Container, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 import getGreeting from "../utils/greeting";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
     const [profileData, setProfileData] = useState(null);
@@ -86,7 +86,7 @@ const Profile = () => {
                 {jwtToken ?
                     profileData ?
                         <>
-                            <h2 className="my-4">{getGreeting()}, {profileData.firstname}!</h2>
+                            <h2 className="my-4">{getGreeting()}!</h2>
                             <div className="d-flex align-items-center gap-4">
                                 <Form className="my-3">
                                     <ProfileLabel
@@ -94,7 +94,7 @@ const Profile = () => {
                                         name="username"
                                         value={profileData.username}
                                         onHandleChange={handleChange}
-                                        isDisabled={!isEditing}
+                                        isDisabled={true}
                                     />
                                     <ProfileLabel
                                         label="First Name"
@@ -141,7 +141,11 @@ const Profile = () => {
                             </div>
                         </>
                         : <Loading />
-                    : <p className="my-3">Welcome Guest, Please LOGIN!</p>}
+                    : <p className="my-3">Welcome Guest, Please {" "}
+                        <Link to="/login">
+                            LOGIN!
+                        </Link>
+                    </p>}
             </Container>
         </>
     );

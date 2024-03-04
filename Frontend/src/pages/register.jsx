@@ -1,4 +1,6 @@
-// RegisterForm.js
+// ! This Component is NOT in use!
+// ! Please look at NewRegister.jsx
+
 import { useState } from "react";
 import { Form, Button, Container, Row, Col, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";

@@ -39,6 +39,15 @@ const NewLogin = () => {
             setError("An Error Occurred");
             setSuccess(false);
         }
+    };
+
+    const handleLoginTest = () => {
+        const values = {
+            email: "testuser@urbannest.com",
+            password: "TestUser@1"
+        };
+
+        loginUser(values);
     }
 
     const formik = useFormik({
@@ -103,6 +112,14 @@ const NewLogin = () => {
                             className="mt-3 w-100"
                         >
                             Login
+                        </Button>
+
+                        <Button
+                            variant="primary"
+                            className="mt-3 w-100"
+                            onClick={handleLoginTest}
+                        >
+                            Login Test Credential
                         </Button>
 
                         <p className="mt-3">

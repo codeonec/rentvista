@@ -68,12 +68,13 @@ const NewRegister = () => {
     return (
         <Container className="py-5">
             <Row className="justify-content-center">
-                <Col md="4">
+                <Col md="5">
                     {success && (
                         <Alert variant="success">
                             Registration Successful.
                         </Alert>
                     )}
+
                     {error && <Alert variant="danger">{error}.</Alert>}
                     <Form onSubmit={formik.handleSubmit}>
                         <Form.Group controlId="username">
@@ -87,35 +88,41 @@ const NewRegister = () => {
                             />
                             <p className="text-danger my-1">{formik.touched.username && formik.errors.username}</p>
                         </Form.Group>
-                        <Form.Group
-                            controlId="firstname"
-                            className="mt-3"
-                        >
-                            <Form.Label>First name</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Enter fist name"
-                                value={formik.values.firstname}
-                                onBlur={formik.handleBlur}
-                                onChange={formik.handleChange}
-                            />
-                            <p className="text-danger my-1">{formik.touched.firstname && formik.errors.firstname}</p>
-                        </Form.Group>
-                        <Form.Group
-                            controlId="lastname"
-                            className="mt-3"
-                        >
-                            <Form.Label>Last name</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Enter last name"
-                                value={formik.values.lastname}
-                                onBlur={formik.handleBlur}
-                                onChange={formik.handleChange}
-                            />
-                            <p className="text-danger my-1">{formik.touched.lastname && formik.errors.lastname}</p>
-                        </Form.Group>
+                        <Row>
+                            <Col>
 
+                                <Form.Group
+                                    controlId="firstname"
+                                    className="mt-3"
+                                >
+                                    <Form.Label>First name</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Enter fist name"
+                                        value={formik.values.firstname}
+                                        onBlur={formik.handleBlur}
+                                        onChange={formik.handleChange}
+                                    />
+                                    <p className="text-danger my-1">{formik.touched.firstname && formik.errors.firstname}</p>
+                                </Form.Group>
+                            </Col>
+                            <Col>
+                                <Form.Group
+                                    controlId="lastname"
+                                    className="mt-3"
+                                >
+                                    <Form.Label>Last name</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Enter last name"
+                                        value={formik.values.lastname}
+                                        onBlur={formik.handleBlur}
+                                        onChange={formik.handleChange}
+                                    />
+                                    <p className="text-danger my-1">{formik.touched.lastname && formik.errors.lastname}</p>
+                                </Form.Group>
+                            </Col>
+                        </Row>
                         <Form.Group controlId="email" className="mt-3">
                             <Form.Label>Email address</Form.Label>
                             <Form.Control

@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const DEFAULT_USER = "/assets/default-user.png";
+const DEFAULT_USER = "default-user.png";
 
 const path = require("path");
 

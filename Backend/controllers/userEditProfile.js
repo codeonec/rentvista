@@ -9,7 +9,9 @@ const userEditProfile = async (req, res) => {
             return res.status(404).json({ error: "User not found" });
         }
 
-        Object.assign(user, req.body);
+        const updatedUser = { ...req.body, profilePicture: req.file?.filename ? req.file.filename : user.profilePicture };
+
+        Object.assign(user, updatedUser);
         await user.save();
 
         res.json({ user });

@@ -63,10 +63,7 @@ const EditProfile = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log('Form Data:', formData);
-
         const { firstname, lastname, email, accountType } = formData;
-
         const fileFormData = new FormData();
 
         fileFormData.append("profilePicture", profilePicture);
@@ -198,7 +195,6 @@ const EditProfile = () => {
                                     accept="image/*"
                                     name="profilePicture"
                                     onChange={(event) => {
-                                        console.log(event.target.files[0]);
                                         setProfilePicture(event.target.files[0]);
                                     }}
                                 />

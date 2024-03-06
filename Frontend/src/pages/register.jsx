@@ -39,7 +39,6 @@ const RegisterForm = () => {
             const data = await response.json();
 
             if (response.ok) {
-                console.log("User registered successfully:", data);
                 setSuccess(true);
                 setTimeout(() => {
                     navigate("/login");

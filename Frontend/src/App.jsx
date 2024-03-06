@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import NewLogin from "./pages/NewLogin";
 import NewProfile from "./pages/NewProfile";
 import EditProfile from "./pages/EditProfile";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
     return (
@@ -17,9 +18,21 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<NewLogin />} />
                 <Route path="/register" element={<NewRegister />} />
-                <Route path="/profile" element={<NewProfile />} />
-                <Route path="/edit-profile" element={<EditProfile />} />
-                <Route path="/properties" element={<Properties />} />
+                <Route path="/profile" element={
+                    <PrivateRoute>
+                        <NewProfile />
+                    </PrivateRoute>
+                } />
+                <Route path="/edit-profile" element={
+                    <PrivateRoute>
+                        <EditProfile />
+                    </PrivateRoute>
+                } />
+                <Route path="/properties" element={
+                    <PrivateRoute>
+                        <Properties />
+                    </PrivateRoute>
+                } />
                 <Route path="/services" element={<Services />} />
                 <Route path="/contact-us" element={<ContactUs />} />
             </Routes>

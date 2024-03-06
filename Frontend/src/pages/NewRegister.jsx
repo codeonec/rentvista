@@ -25,7 +25,6 @@ const NewRegister = () => {
             const data = await response.json();
 
             if (response.ok) {
-                console.log("User registered successfully:", data);
                 setSuccess(true);
                 formik.resetForm();
                 setTimeout(() => {

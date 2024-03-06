@@ -1,14 +1,17 @@
 import { useFormik } from 'formik';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { loginSchema } from "../utils/formSchemas/loginSchema";
 import { Alert, Button, Col, Container, Row, Form } from 'react-bootstrap';
 import { useState } from 'react';
+import { useLogin } from '../contexts/login-context';
 
 const NewLogin = () => {
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState("");
+    const { setIsLoggedIn } = useLogin();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const loginUser = async (values) => {
         try {
@@ -24,13 +27,20 @@ const NewLogin = () => {
 
             if (response.ok) {
                 localStorage.setItem("token", JSON.stringify(data.token));
+                setIsLoggedIn(true);
                 setSuccess(true);
                 formik.resetForm();
+
+                const redirect = location?.state?.from?.pathname;
+                const from = redirect === undefined
+                    ? "/"
+                    : redirect
                 setTimeout(() => {
-                    navigate("/");
+                    navigate(from, { replace: true });
                 }, 2000);
             } else {
                 console.error("Login failed:", data.error);
+                setIsLoggedIn(false);
                 setError(data.error);
                 setSuccess(false);
             }

@@ -9,6 +9,7 @@ import NewLogin from "./pages/NewLogin";
 import NewProfile from "./pages/NewProfile";
 import EditProfile from "./pages/EditProfile";
 import PrivateRoute from "./components/PrivateRoute";
+import PageNotFound from "./pages/PageNotFound";
 
 function App() {
     return (
@@ -33,8 +34,13 @@ function App() {
                         <Properties />
                     </PrivateRoute>
                 } />
-                <Route path="/services" element={<Services />} />
+                <Route path="/services" element={
+                    <PrivateRoute>
+                        <Services />
+                    </PrivateRoute>
+                } />
                 <Route path="/contact-us" element={<ContactUs />} />
+                <Route path="*" element={<PageNotFound />} />
             </Routes>
         </>
     );

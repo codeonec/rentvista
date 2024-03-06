@@ -101,8 +101,8 @@ const NewProfile = () => {
                     <img
                         src={"http://localhost:5000/assets/uploads/" + profilePicture}
                         alt="profile photo"
-                        className="m-2 shadow border"
-                        style={{ width: "200px", height: "200px", objectFit: "cover", borderRadius: "50%" }}
+                        className="m-4 my-4 shadow-sm"
+                        style={{ width: "200px", height: "200px", objectFit: "cover", borderRadius: "10px" }}
                     />
                 </Col>
             </Row>

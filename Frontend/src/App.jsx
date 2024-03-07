@@ -10,6 +10,7 @@ import NewProfile from "./pages/NewProfile";
 import EditProfile from "./pages/EditProfile";
 import PrivateRoute from "./components/PrivateRoute";
 import PageNotFound from "./pages/PageNotFound";
+import ForgotPasswordForm from "./pages/forgotPassword";
 
 function App() {
     return (
@@ -19,27 +20,40 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<NewLogin />} />
                 <Route path="/register" element={<NewRegister />} />
-                <Route path="/profile" element={
-                    <PrivateRoute>
-                        <NewProfile />
-                    </PrivateRoute>
-                } />
-                <Route path="/edit-profile" element={
-                    <PrivateRoute>
-                        <EditProfile />
-                    </PrivateRoute>
-                } />
-                <Route path="/properties" element={
-                    <PrivateRoute>
-                        <Properties />
-                    </PrivateRoute>
-                } />
-                <Route path="/services" element={
-                    <PrivateRoute>
-                        <Services />
-                    </PrivateRoute>
-                } />
+                <Route
+                    path="/profile"
+                    element={
+                        <PrivateRoute>
+                            <NewProfile />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/edit-profile"
+                    element={
+                        <PrivateRoute>
+                            <EditProfile />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/properties"
+                    element={
+                        <PrivateRoute>
+                            <Properties />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/services"
+                    element={
+                        <PrivateRoute>
+                            <Services />
+                        </PrivateRoute>
+                    }
+                />
                 <Route path="/contact-us" element={<ContactUs />} />
+                <Route path="/reset" element={<ForgotPasswordForm />} />
                 <Route path="*" element={<PageNotFound />} />
             </Routes>
         </>

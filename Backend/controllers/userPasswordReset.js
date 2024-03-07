@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const nodemailer = require("nodemailer");
+const bcrypt = require("bcrypt");
 
 // Generate a random reset token
 const generateResetToken = () => {
@@ -28,10 +29,10 @@ const forgotPassword = async (req, res) => {
             host: "sandbox.smtp.mailtrap.io",
             port: 2525,
             auth: {
-              user: "4b74af648c9573",
-              pass: "087d61614831cd"
-            }
-          });
+                user: "4b74af648c9573",
+                pass: "087d61614831cd",
+            },
+        });
 
         const mailOptions = {
             from: "reset@urbannest.com",
@@ -57,4 +58,32 @@ const forgotPassword = async (req, res) => {
     }
 };
 
-module.exports = { forgotPassword };
+const resetPassword = async (req, res) => {
+    const { token, newPassword } = req.body;
+
+    try {
+        // Find the user by the reset token
+        const user = await User.findOne({ resetToken: token });
+
+        if (!user) {
+            return res
+                .status(404)
+                .json({ error: "Invalid or expired reset token" });
+        }
+
+        // Verify the reset token and update the user's password
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
+
+        user.password = hashedPassword;
+        user.resetToken = null; // Clear the reset token after successful password reset
+        await user.save();
+
+        res.status(200).json({ message: "Password reset successful" });
+    } catch (error) {
+        console.error("Error during password reset:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
+module.exports = { forgotPassword, resetPassword };

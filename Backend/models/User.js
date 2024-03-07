@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const DEFAULT_USER = "default-user.png";
 
-const path = require("path");
 
 const userSchema = new mongoose.Schema({
     firstname: { type: String, required: true },
@@ -16,6 +15,7 @@ const userSchema = new mongoose.Schema({
         required: true,
     },
     registrationDate: { type: Date, default: Date.now },
+    resetToken: { type: String },
 });
 
 const User = mongoose.model("User", userSchema);

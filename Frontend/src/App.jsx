@@ -11,6 +11,7 @@ import EditProfile from "./pages/EditProfile";
 import PrivateRoute from "./components/PrivateRoute";
 import PageNotFound from "./pages/PageNotFound";
 import ForgotPasswordForm from "./pages/forgotPassword";
+import ResetPasswordPage from "./pages/resetPassword";
 
 function App() {
     return (
@@ -53,7 +54,8 @@ function App() {
                     }
                 />
                 <Route path="/contact-us" element={<ContactUs />} />
-                <Route path="/reset" element={<ForgotPasswordForm />} />
+                <Route path="/forgot-password" element={<ForgotPasswordForm />} />
+                <Route path="/reset-password" element={<ResetPasswordPage />} />
                 <Route path="*" element={<PageNotFound />} />
             </Routes>
         </>

@@ -1,10 +1,10 @@
-import { useFormik } from 'formik';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { z } from 'zod';
+import { useFormik } from "formik";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { z } from "zod";
 import { loginSchema } from "../utils/formSchemas/loginSchema";
-import { Alert, Button, Col, Container, Row, Form } from 'react-bootstrap';
-import { useState } from 'react';
-import { useLogin } from '../contexts/login-context';
+import { Alert, Button, Col, Container, Row, Form } from "react-bootstrap";
+import { useState } from "react";
+import { useLogin } from "../contexts/login-context";
 
 const NewLogin = () => {
     const [success, setSuccess] = useState(false);
@@ -32,9 +32,7 @@ const NewLogin = () => {
                 formik.resetForm();
 
                 const redirect = location?.state?.from?.pathname;
-                const from = redirect === undefined
-                    ? "/"
-                    : redirect
+                const from = redirect === undefined ? "/" : redirect;
                 setTimeout(() => {
                     navigate(from, { replace: true });
                 }, 2000);
@@ -54,11 +52,11 @@ const NewLogin = () => {
     const handleLoginTest = () => {
         const values = {
             email: "testuser@urbannest.com",
-            password: "TestUser@1"
+            password: "TestUser@1",
         };
 
         loginUser(values);
-    }
+    };
 
     const formik = useFormik({
         initialValues: {
@@ -66,7 +64,7 @@ const NewLogin = () => {
             password: "",
         },
         onSubmit: (values) => loginUser(values),
-        validate: values => {
+        validate: (values) => {
             try {
                 loginSchema.parse(values);
             } catch (error) {
@@ -74,8 +72,7 @@ const NewLogin = () => {
                     return error.formErrors.fieldErrors;
                 }
             }
-        }
-
+        },
     });
 
     return (
@@ -83,9 +80,7 @@ const NewLogin = () => {
             <Row className="justify-content-center">
                 <Col md="4">
                     {success && (
-                        <Alert variant="success">
-                            Login Successful.
-                        </Alert>
+                        <Alert variant="success">Login Successful.</Alert>
                     )}
                     {error && <Alert variant="danger">{error}.</Alert>}
                     <Form onSubmit={formik.handleSubmit}>
@@ -98,13 +93,12 @@ const NewLogin = () => {
                                 onBlur={formik.handleBlur}
                                 onChange={formik.handleChange}
                             />
-                            <p className="text-danger my-1">{formik.touched.email && formik.errors.email}</p>
+                            <p className="text-danger my-1">
+                                {formik.touched.email && formik.errors.email}
+                            </p>
                         </Form.Group>
 
-                        <Form.Group
-                            controlId="password"
-                            className="mt-3"
-                        >
+                        <Form.Group controlId="password" className="mt-3">
                             <Form.Label>Password</Form.Label>
                             <Form.Control
                                 type="password"
@@ -113,7 +107,10 @@ const NewLogin = () => {
                                 onBlur={formik.handleBlur}
                                 onChange={formik.handleChange}
                             />
-                            <p className="text-danger my-1">{formik.touched.password && formik.errors.password}</p>
+                            <p className="text-danger my-1">
+                                {formik.touched.password &&
+                                    formik.errors.password}
+                            </p>
                         </Form.Group>
 
                         <Button
@@ -133,14 +130,14 @@ const NewLogin = () => {
                         </Button>
 
                         <p className="mt-3">
-                            Not a member?{" "}
-                            <Link to="/register">Register</Link>
+                            Not a member? <Link to="/register">Register</Link>
                         </p>
+                        <Link to="/forgot-password">Forgot password?</Link>
                     </Form>
                 </Col>
             </Row>
         </Container>
-    )
-}
+    );
+};
 
-export default NewLogin
+export default NewLogin;

@@ -123,7 +123,7 @@ const EditProfile = () => {
                     <Form onSubmit={handleSubmit}>
                         <Row className="mb-3">
                             <Col>
-                                <Form.Label>Username</Form.Label>
+                                <Form.Label className="fw-semibold">Username</Form.Label>
                                 <Form.Control
                                     type="text"
                                     placeholder="Enter username"
@@ -138,7 +138,7 @@ const EditProfile = () => {
                         </Row>
                         <Row className="mb-3">
                             <Col>
-                                <Form.Label>First Name</Form.Label>
+                                <Form.Label className="fw-semibold">First Name</Form.Label>
                                 <Form.Control
                                     type="text"
                                     placeholder="Enter first name"
@@ -149,7 +149,7 @@ const EditProfile = () => {
                                 />
                             </Col>
                             <Col>
-                                <Form.Label>Last Name</Form.Label>
+                                <Form.Label className="fw-semibold">Last Name</Form.Label>
                                 <Form.Control
                                     type="text"
                                     placeholder="Enter last name"
@@ -162,7 +162,7 @@ const EditProfile = () => {
                         </Row>
                         <Row className="mb-3">
                             <Col>
-                                <Form.Label>Email</Form.Label>
+                                <Form.Label className="fw-semibold">Email</Form.Label>
                                 <Form.Control
                                     type="email"
                                     placeholder="Enter email"
@@ -175,7 +175,7 @@ const EditProfile = () => {
                         </Row>
                         <Row className="mb-3">
                             <Col>
-                                <Form.Label>Account Type</Form.Label>
+                                <Form.Label className="fw-semibold">Account Type</Form.Label>
                                 <Form.Select
                                     name="accountType"
                                     value={accountType}
@@ -189,7 +189,7 @@ const EditProfile = () => {
                         </Row>
                         <Row className="mb-3">
                             <Col>
-                                <Form.Label>Profile Picture</Form.Label>
+                                <Form.Label className="fw-semibold">Profile Picture</Form.Label>
                                 <Form.Control
                                     type="file"
                                     accept="image/*"
@@ -204,7 +204,7 @@ const EditProfile = () => {
                         <Row className="my-2">
                             <Col md={4} className="my-2">
                                 <Button
-                                    variant="primary"
+                                    variant="secondary"
                                     className="w-100"
                                     onClick={() => {
                                         navigate("/profile");

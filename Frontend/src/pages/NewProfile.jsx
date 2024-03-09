@@ -64,7 +64,7 @@ const NewProfile = () => {
         return (
             <div className=" my-3">
                 <Col>
-                    <Form.Label>{label}</Form.Label>
+                    <Form.Label className="fw-semibold">{label}</Form.Label>
                     <Form.Control
                         type="text"
                         value={text}
@@ -98,12 +98,13 @@ const NewProfile = () => {
                         Edit Profile
                     </Button>
                     <Button
+                        variant="success"
                         className="w-100 my-2"
                         onClick={() => {
                             navigate("/listings");
                         }}
                     >
-                        Create Listing
+                        Create new listing
                     </Button>
                 </Col>
 

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const listingSchema = new mongoose.Schema(
     {
-        name: {
+        title: {
             type: String,
             required: true,
         },
@@ -20,31 +20,23 @@ const listingSchema = new mongoose.Schema(
         },
         discountPrice: {
             type: Number,
+        },
+        bedrooms: {
+            type: Number,
             required: true,
         },
         bathrooms: {
             type: Number,
             required: true,
         },
-        bedrooms: {
-            type: Number,
-            required: true,
-        },
         furnished: {
             type: Boolean,
-            required: true,
         },
         parking: {
             type: Boolean,
-            required: true,
-        },
-        type: {
-            type: String,
-            required: true,
         },
         gym: {
             type: Boolean,
-            required: true,
         },
         imageUrls: {
             type: Array,

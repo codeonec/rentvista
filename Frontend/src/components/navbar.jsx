@@ -9,10 +9,17 @@ import { useLogin } from "../contexts/login-context";
 
 function NavBar() {
     const { isLoggedIn, setIsLoggedIn } = useLogin();
+    console.log(isLoggedIn, 12, "navbar");
     const navigate = useNavigate();
 
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        setIsLoggedIn(false);
+        navigate("/login");
+    }
+
     return (
-        <Navbar expand="lg" className="bg-body-tertiary shadow-sm">
+        <Navbar expand="lg" className="bg-body-tertiary shadow-sm" sticky="top">
             <Container>
                 <Link to="/" className="navbar-brand">
                     <img src={LOGO} width="200px" alt="UrbanNest" />
@@ -29,18 +36,15 @@ function NavBar() {
                     </Form>
                     <Nav>
                         <Link to="/" className="nav-link">Home</Link>
-                        <Link to="/properties" className="nav-link">Properties</Link>
+                        {/* <Link to="/properties" className="nav-link">Properties</Link> */}
+                        <Link to="/listings" className="nav-link">Listings</Link>
                         <Link to="/services" className="nav-link">Services</Link>
                         {isLoggedIn && <Link to="/profile" className="nav-link">Profile</Link>}
                         <Link to="/contact-us" className="nav-link">Contact Us</Link>
                         {isLoggedIn ? (
                             <Link
                                 className="nav-link"
-                                onClick={() => {
-                                    localStorage.removeItem("token");
-                                    setIsLoggedIn(false);
-                                    navigate("/login");
-                                }}
+                                onClick={handleLogout}
                             >
                                 Logout
                             </Link>

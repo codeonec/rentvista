@@ -1,6 +1,5 @@
 import NavBar from "./components/Navbar";
 import { Route, Routes } from "react-router-dom";
-import Properties from "./pages/Properties";
 import Services from "./pages/Services";
 import ContactUs from "./pages/ContactUs";
 import NewRegister from "./pages/NewRegister";
@@ -12,6 +11,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import PageNotFound from "./pages/PageNotFound";
 import ForgotPasswordForm from "./pages/forgotPassword";
 import ResetPasswordPage from "./pages/resetPassword";
+import CreateListing from "./pages/CreateListing";
 
 function App() {
     return (
@@ -38,10 +38,10 @@ function App() {
                     }
                 />
                 <Route
-                    path="/properties"
+                    path="/listings"
                     element={
                         <PrivateRoute>
-                            <Properties />
+                            <CreateListing />
                         </PrivateRoute>
                     }
                 />

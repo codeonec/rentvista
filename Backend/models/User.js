@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const DEFAULT_USER = "default-user.png";
+const DEFAULT_USER = "default-photo.png";
 
 
 const userSchema = new mongoose.Schema({

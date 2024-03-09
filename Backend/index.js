@@ -1,9 +1,10 @@
 const express = require("express");
-const PORT = process.env.PORT || 5000;
 const mongoose = require("mongoose");
-const userRoutes = require("./routes/userRoutes");
 const cors = require("cors");
 const path = require("path");
+const userRoutes = require("./routes/userRoutes");
+const listingRoutes = require("./routes/listingRoutes");
+const PORT = process.env.PORT || 5000;
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 app.use("/user", userRoutes);
+app.use("/listing", listingRoutes);
 
 // const URI = "mongodb+srv://rpatel0083:UrbanNest1@urbannest.3gm8btz.mongodb.net/?retryWrites=true&w=majority"; 
 const URI = "mongodb+srv://hrshmistry:Conestoga8670@cluster0.rupceib.mongodb.net/UrbanNestDB?retryWrites=true&w=majority";

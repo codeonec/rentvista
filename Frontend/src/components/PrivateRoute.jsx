@@ -6,6 +6,8 @@ const PrivateRoute = ({ children }) => {
     const { isLoggedIn } = useLogin();
     const location = useLocation();
 
+    console.log(isLoggedIn, 9, "private");
+
     return isLoggedIn
         ? children
         : <Navigate to="/login" state={{ from: location }} replace />

@@ -83,8 +83,10 @@ const NewProfile = () => {
             <Row>
                 <Col md={6}>
                     <TextWithLabel label={"Username"} text={username} />
-                    <TextWithLabel label={"First Name"} text={firstname} />
-                    <TextWithLabel label={"Last Name"} text={lastname} />
+                    <Row md={2}>
+                        <TextWithLabel label={"First Name"} text={firstname} />
+                        <TextWithLabel label={"Last Name"} text={lastname} />
+                    </Row>
                     <TextWithLabel label={"Email"} text={email} />
                     <TextWithLabel label={"Account Type"} text={accountType} />
                     <Button
@@ -94,6 +96,14 @@ const NewProfile = () => {
                         }}
                     >
                         Edit Profile
+                    </Button>
+                    <Button
+                        className="w-100 my-2"
+                        onClick={() => {
+                            navigate("/listings");
+                        }}
+                    >
+                        Create Listing
                     </Button>
                 </Col>
 

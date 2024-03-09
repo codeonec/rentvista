@@ -31,8 +31,8 @@ const NewLogin = () => {
                 setSuccess(true);
                 formik.resetForm();
 
-                const redirect = location?.state?.from?.pathname;
-                const from = redirect === undefined ? "/" : redirect;
+                const from = location?.state?.from?.pathname || "/";
+
                 setTimeout(() => {
                     navigate(from, { replace: true });
                 }, 2000);

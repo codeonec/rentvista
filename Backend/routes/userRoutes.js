@@ -2,11 +2,11 @@ const express = require("express");
 const multer = require('multer');
 
 const authMiddleware = require("../middleware/authMiddleware");
-const { userRegister } = require("../controllers/userRegister");
-const { userLogin } = require("../controllers/userLogin");
-const { userProfile } = require("../controllers/userProfile");
-const { userEditProfile } = require("../controllers/userEditProfile");
-const { forgotPassword, resetPassword } = require("../controllers/userPasswordReset");
+const { userRegister } = require("../controllers/userControllers/userRegister");
+const { userLogin } = require("../controllers/userControllers/userLogin");
+const { userProfile } = require("../controllers/userControllers/userProfile");
+const { userEditProfile } = require("../controllers/userControllers/userEditProfile");
+const { forgotPassword, resetPassword } = require("../controllers/userControllers/userPasswordReset");
 
 const router = express.Router();
 

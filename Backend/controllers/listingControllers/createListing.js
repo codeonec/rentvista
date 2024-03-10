@@ -14,7 +14,7 @@ const createListing = async (req, res) => {
             imageUrls: filenames
         });
 
-        res.json({ "success": true });
+        res.json({ listing });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal Server Error" });

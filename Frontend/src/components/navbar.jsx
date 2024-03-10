@@ -49,16 +49,19 @@ function NavBar() {
                         <Link to="/listings" className="nav-link">Listings</Link>
                         <Link to="/services" className="nav-link">Services</Link>
                         {isLoggedIn
-                            ?
-                            (
+                            ? (
                                 <Dropdown>
                                     <Dropdown.Toggle variant="light" id="dropdown-basic">
                                         {`${currectUser.firstname} ${currectUser.lastname}`}
                                         <img
                                             src={"http://localhost:5000/assets/uploads/" + currectUser.profilePicture}
                                             alt="profile picture"
-                                            width="25px" height="25px"
-                                            style={{ borderRadius: "4px", marginInline: "0.5rem" }}
+                                            width="30px" height="30px"
+                                            style={{
+                                                borderRadius: "40px",
+                                                marginInline: "0.5rem",
+                                                objectFit: "cover"
+                                            }}
                                         />
                                     </Dropdown.Toggle>
 

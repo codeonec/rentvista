@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const userLogin = async (req, res) => {
-    const { email, password } = req.body;
+    const { email } = req.body;
 
     try {
         const user = await User.findOne({ email });
@@ -12,7 +12,7 @@ const userLogin = async (req, res) => {
             return res.status(401).json({ error: "Invalid email or password" });
         }
 
-        const passwordMatch = await bcrypt.compare(password, user.password);
+        const passwordMatch = await bcrypt.compare(req.body.password, user.password);
 
         if (!passwordMatch) {
             return res.status(401).json({ error: "Invalid email or password" });
@@ -23,7 +23,10 @@ const userLogin = async (req, res) => {
             "urbannestjwttoken"
         );
 
-        res.status(200).json({ message: "User logged in successfully", token });
+        const { password, ...rest } = user._doc;
+        console.log(rest);
+
+        res.status(200).json({ message: "User logged in successfully", token, user: rest });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal Server Error" });

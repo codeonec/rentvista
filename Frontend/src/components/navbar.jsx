@@ -6,15 +6,25 @@ import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import LOGO from "../assets/images/logo.png";
 import { useLogin } from "../contexts/login-context";
+import { Dropdown } from "react-bootstrap";
 
 function NavBar() {
-    const { isLoggedIn, setIsLoggedIn } = useLogin();
-    console.log(isLoggedIn, 12, "navbar");
+    const {
+        isLoggedIn,
+        setIsLoggedIn,
+        currectUser,
+        setCurrentUser,
+        removeLocalStorageItem
+    } = useLogin();
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        localStorage.removeItem("token");
+        removeLocalStorageItem("token")
         setIsLoggedIn(false);
+
+        removeLocalStorageItem("currentUser");
+        setCurrentUser(null);
+
         navigate("/login");
     }
 
@@ -36,21 +46,33 @@ function NavBar() {
                     </Form>
                     <Nav>
                         <Link to="/" className="nav-link">Home</Link>
-                        {/* <Link to="/properties" className="nav-link">Properties</Link> */}
                         <Link to="/listings" className="nav-link">Listings</Link>
                         <Link to="/services" className="nav-link">Services</Link>
-                        {isLoggedIn && <Link to="/profile" className="nav-link">Profile</Link>}
-                        <Link to="/contact-us" className="nav-link">Contact Us</Link>
-                        {isLoggedIn ? (
-                            <Link
-                                className="nav-link"
-                                onClick={handleLogout}
-                            >
-                                Logout
-                            </Link>
-                        ) : (
-                            <Link to="/login" className="nav-link">Login</Link>
-                        )}
+                        {isLoggedIn
+                            ?
+                            (
+                                <Dropdown>
+                                    <Dropdown.Toggle variant="light" id="dropdown-basic">
+                                        {`${currectUser.firstname} ${currectUser.lastname}`}
+                                        <img
+                                            src={"http://localhost:5000/assets/uploads/" + currectUser.profilePicture}
+                                            alt="profile picture"
+                                            width="25px" height="25px"
+                                            style={{ borderRadius: "4px", marginInline: "0.5rem" }}
+                                        />
+                                    </Dropdown.Toggle>
+
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item as={Link} to="/profile">Profile</Dropdown.Item>
+                                        <Dropdown.Item as={Link} to="/create-listing">Create Listing</Dropdown.Item>
+                                        <Dropdown.Item as={Link} to="/contact-us">Contact Us</Dropdown.Item>
+                                        <Dropdown.Item as={Link} to="/login" onClick={handleLogout}>Logout</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            )
+                            : (
+                                <Link to="/login" className="nav-link">Login</Link>
+                            )}
                     </Nav>
                 </Navbar.Collapse>
             </Container>

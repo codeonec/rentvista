@@ -4,6 +4,7 @@ import { Container, Row } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
+import { useLogin } from '../contexts/login-context';
 
 const CreateListing = () => {
     const initialFormData = {
@@ -22,6 +23,7 @@ const CreateListing = () => {
         images: [],
     };
 
+    const { authToken } = useLogin();
     const [formData, setFormData] = useState(initialFormData);
     const imageRef = useRef(null);
 
@@ -57,8 +59,6 @@ const CreateListing = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log(formData.images);
-
         const formDataObject = new FormData();
 
         formDataObject.append('title', formData.title);
@@ -76,9 +76,7 @@ const CreateListing = () => {
 
         Array.from(formData.images).forEach(item => {
             formDataObject.append('images', item)
-        })
-
-        const token = JSON.parse(localStorage.getItem("token"));
+        });
 
         const createListing = () => {
             try {
@@ -86,7 +84,7 @@ const CreateListing = () => {
                 fetch('http://localhost:5000/listing/auth/create', {
                     method: 'POST',
                     headers: {
-                        authorization: `Bearer ${token}`,
+                        authorization: `Bearer ${authToken}`,
                     },
                     body: formDataObject,
                 }).then((response) => {
@@ -113,7 +111,7 @@ const CreateListing = () => {
 
     return (
         <Container className='my-4'>
-            <h3>Create a Listing</h3>
+            <h4>Create a Listing</h4>
             <Form onSubmit={handleSubmit} className='my-4'>
                 <Row>
                     <Col md={6} className="mb-3">

@@ -27,7 +27,7 @@ const ContactUs = () => {
         <Container>
             <Row className="justify-content mt-5">
                 <Col md={6}>
-                    <h2>Contact Us</h2>
+                    <h4>Contact Us</h4>
                     <Form onSubmit={handleSubmit}>
                         <Form.Group controlId="formName" className='my-4'>
                             <Form.Label>Name</Form.Label>

@@ -9,12 +9,14 @@ import { useLogin } from "../contexts/login-context";
 const NewLogin = () => {
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState("");
-    const { setIsLoggedIn } = useLogin();
+    const [loading, setLoading] = useState(false);
+    const { setIsLoggedIn, setCurrentUser, setLocalStorageItem } = useLogin();
     const navigate = useNavigate();
     const location = useLocation();
 
     const loginUser = async (values) => {
         try {
+            setLoading(true);
             const response = await fetch("http://localhost:5000/user/login", {
                 method: "POST",
                 headers: {
@@ -26,8 +28,13 @@ const NewLogin = () => {
             const data = await response.json();
 
             if (response.ok) {
-                localStorage.setItem("token", JSON.stringify(data.token));
+                setLocalStorageItem("token", data.token);
                 setIsLoggedIn(true);
+
+                setLocalStorageItem("currentUser", data.user);
+                setCurrentUser(data.user);
+
+                setLoading(false);
                 setSuccess(true);
                 formik.resetForm();
 
@@ -35,17 +42,19 @@ const NewLogin = () => {
 
                 setTimeout(() => {
                     navigate(from, { replace: true });
-                }, 2000);
+                }, 1000);
             } else {
                 console.error("Login failed:", data.error);
                 setIsLoggedIn(false);
                 setError(data.error);
                 setSuccess(false);
+                setLoading(false);
             }
         } catch (error) {
             console.error("Error during login:", error);
             setError("An Error Occurred");
             setSuccess(false);
+            setLoading(false);
         }
     };
 
@@ -118,7 +127,10 @@ const NewLogin = () => {
                             type="submit"
                             className="mt-3 w-100"
                         >
-                            Login
+                            {loading
+                                ? "Loading..."
+                                : "Login"
+                            }
                         </Button>
 
                         <Button
@@ -126,7 +138,10 @@ const NewLogin = () => {
                             className="mt-3 w-100"
                             onClick={handleLoginTest}
                         >
-                            Login Test Credential
+                            {loading
+                                ? "Loading..."
+                                : "Login Test Credential"
+                            }
                         </Button>
 
                         <p className="mt-3">

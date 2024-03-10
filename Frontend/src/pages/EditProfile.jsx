@@ -1,55 +1,17 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import Loading from "../components/Loading";
+import { useLogin } from "../contexts/login-context";
 
 const EditProfile = () => {
-    const [profileData, setProfileData] = useState(null);
-    const [formData, setFormData] = useState(null);
+    const { currectUser, setCurrentUser, authToken, setLocalStorageItem } = useLogin();
+    const [formData, setFormData] = useState(currectUser);
     const [profilePicture, setProfilePicture] = useState(null);
-    const [jwtToken, setJwtToken] = useState(null);
     const [success, setSuccess] = useState(false);
+    const [loading, setLoading] = useState(false);
+
     const navigate = useNavigate();
-
-    useEffect(() => {
-        const token = JSON.parse(localStorage.getItem("token"));
-        setJwtToken(token);
-
-        try {
-            if (token) {
-                fetch("http://localhost:5000/user/auth/profile", {
-                    method: "GET",
-                    headers: {
-                        authorization: `Bearer ${token}`,
-                        "Content-Type": "application/json",
-                    },
-                }).then((response) => {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        throw new Error("Failed to fetch profile data");
-                    }
-                }).then((data) => {
-                    setProfileData(data.user);
-                    setFormData(data.user)
-                })
-            }
-        } catch (error) {
-            console.error("Error:", error);
-        }
-    }, []);
-
-    if (!jwtToken) {
-        return (
-            <Container>
-                <p className="my-3">Welcome Guest, Please {" "}
-                    <Link to="/login">
-                        LOGIN!
-                    </Link>
-                </p>
-            </Container>
-        )
-    }
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -73,23 +35,29 @@ const EditProfile = () => {
         fileFormData.append("accountType", accountType);
 
         try {
-            if (jwtToken) {
+            if (authToken) {
+                setLoading(true);
                 const response = await fetch(`http://localhost:5000/user/auth/edit-profile`, {
                     method: "POST",
                     headers: {
-                        authorization: `Bearer ${jwtToken}`,
+                        authorization: `Bearer ${authToken}`,
                     },
                     body: fileFormData
                 });
 
                 if (response.ok) {
                     const data = await response.json();
-                    console.log({ data });
+                    setCurrentUser(data.user);
+                    setLocalStorageItem("currentUser", data.user);
+
                     setSuccess(true);
+                    setLoading(false);
+
                     setTimeout(() => {
                         navigate("/profile");
-                    }, 2000);
+                    }, 1000);
                 } else {
+                    setLoading(false);
                     throw new Error("Failed to edit profile data");
                 }
             }
@@ -98,8 +66,7 @@ const EditProfile = () => {
         }
     };
 
-
-    if (!profileData) {
+    if (!currectUser) {
         return (
             <Container>
                 <Loading />
@@ -215,7 +182,10 @@ const EditProfile = () => {
                             </Col>
                             <Col md={8} className="my-2">
                                 <Button variant="primary" className="w-100" type="submit">
-                                    Save
+                                    {loading
+                                        ? "Saving..."
+                                        : "Save"
+                                    }
                                 </Button>
                             </Col>
                         </Row>

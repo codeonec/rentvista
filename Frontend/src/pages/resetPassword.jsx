@@ -32,7 +32,7 @@ const ResetPasswordPage = () => {
                 setResetSuccess(true);
                 setTimeout(() => {
                     navigate("/login");
-                }, 2000);
+                }, 1000);
             } else {
                 console.error("Password reset failed:", data.error);
                 // Handle password reset failure, display an error message, etc.

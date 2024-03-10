@@ -12,6 +12,7 @@ import PageNotFound from "./pages/PageNotFound";
 import ForgotPasswordForm from "./pages/forgotPassword";
 import ResetPasswordPage from "./pages/resetPassword";
 import CreateListing from "./pages/CreateListing";
+import Listings from "./pages/Listings";
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<NewLogin />} />
                 <Route path="/register" element={<NewRegister />} />
+                <Route path="/listings" element={<Listings />} />
                 <Route
                     path="/profile"
                     element={
@@ -38,7 +40,7 @@ function App() {
                     }
                 />
                 <Route
-                    path="/listings"
+                    path="/create-listing"
                     element={
                         <PrivateRoute>
                             <CreateListing />

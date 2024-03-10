@@ -1,54 +1,14 @@
-import { useState, useEffect } from "react";
 import Loading from "../components/Loading";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import getGreeting from "../utils/greeting";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useLogin } from "../contexts/login-context";
 
 const NewProfile = () => {
-    const [profileData, setProfileData] = useState(null);
-    const [jwtToken, setJwtToken] = useState(null);
+    const { currectUser } = useLogin();
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const token = JSON.parse(localStorage.getItem("token"));
-        setJwtToken(token);
-
-        try {
-            if (token) {
-                fetch("http://localhost:5000/user/auth/profile", {
-                    method: "GET",
-                    headers: {
-                        authorization: `Bearer ${token}`,
-                        "Content-Type": "application/json",
-                    },
-                }).then((response) => {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        throw new Error("Failed to fetch profile data");
-                    }
-                }).then((data) => {
-                    setProfileData(data.user);
-                })
-            }
-        } catch (error) {
-            console.error("Error:", error);
-        }
-    }, []);
-
-    if (!jwtToken) {
-        return (
-            <Container>
-                <p className="my-3">Welcome Guest, Please {" "}
-                    <Link to="/login">
-                        LOGIN!
-                    </Link>
-                </p>
-            </Container>
-        )
-    }
-
-    if (!profileData) {
+    if (!currectUser) {
         return (
             <Container>
                 <Loading />
@@ -56,7 +16,7 @@ const NewProfile = () => {
         )
     }
 
-    const { username, firstname, lastname, email, accountType, profilePicture } = profileData;
+    const { username, firstname, lastname, email, accountType, profilePicture } = currectUser;
     const fullname = `${firstname} ${lastname}`;
 
     // eslint-disable-next-line react/prop-types
@@ -92,7 +52,7 @@ const NewProfile = () => {
                     <Button
                         className="w-100 my-2"
                         onClick={() => {
-                            navigate("/edit-profile", { state: profileData });
+                            navigate("/edit-profile", { state: currectUser });
                         }}
                     >
                         Edit Profile
@@ -101,7 +61,7 @@ const NewProfile = () => {
                         variant="success"
                         className="w-100 my-2"
                         onClick={() => {
-                            navigate("/listings");
+                            navigate("/create-listing");
                         }}
                     >
                         Create new listing
@@ -113,7 +73,12 @@ const NewProfile = () => {
                         src={"http://localhost:5000/assets/uploads/" + profilePicture}
                         alt="profile photo"
                         className="m-4 my-4 shadow-sm"
-                        style={{ width: "200px", height: "200px", objectFit: "cover", borderRadius: "10px" }}
+                        style={{
+                            width: "200px",
+                            height: "200px",
+                            objectFit: "cover",
+                            borderRadius: "10px"
+                        }}
                     />
                 </Col>
             </Row>

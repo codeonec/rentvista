@@ -29,7 +29,7 @@ const NewRegister = () => {
                 formik.resetForm();
                 setTimeout(() => {
                     navigate("/login");
-                }, 2000);
+                }, 1000);
             } else {
                 console.error("Registration failed:", data.error);
                 setError(data.error);

@@ -1,11 +1,29 @@
-import { Container } from "react-bootstrap";
+import { Col, Container, Row, Tab, Tabs } from "react-bootstrap";
+import AdminUserTab from "../components/adminUserTab";
 
 const AdminDashboard = () => {
     return (
-        <Container className="mt-5">
-            <h2>Admin Dashboard</h2>
-            {/* Add admin dashboard content here */}
-        </Container>
+        <>
+            <Container>
+                <Row>
+                    <Col>
+                        <h1 className="py-5">Admin Dashboard</h1>
+                        <Tabs
+                            defaultActiveKey="user"
+                            id="uncontrolled-tab-example"
+                            className="mb-3"
+                        >
+                            <Tab eventKey="user" title="Users">
+                                <AdminUserTab />
+                            </Tab>
+                            <Tab eventKey="listing" title="Listings">
+                                Tab content for Profile
+                            </Tab>
+                        </Tabs>
+                    </Col>
+                </Row>
+            </Container>
+        </>
     );
 };
 

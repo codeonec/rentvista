@@ -1,5 +1,3 @@
-// AdminLogin.js
-
 import React, { useState } from "react";
 import { Container, Form, Button, Row, Col, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -38,7 +36,6 @@ const AdminLogin = () => {
             if (response.ok) {
                 // Remove Current LoggedIn User first
                 removeLocalStorageItem("token");
-                setIsLoggedIn(false);
 
                 removeLocalStorageItem("currentUser");
                 setCurrentUser(null);

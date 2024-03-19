@@ -5,7 +5,7 @@ import Loading from "../components/Loading";
 import { useLogin } from "../contexts/login-context";
 
 const EditProfile = () => {
-    const { currentUser, setCurrentUser, authToken, setLocalStorageItem } = useLogin();
+    const { currentUser, setCurrentUser, setLocalStorageItem } = useLogin();
     const [formData, setFormData] = useState(currentUser);
     const [profilePicture, setProfilePicture] = useState(null);
     const [success, setSuccess] = useState(false);
@@ -33,6 +33,8 @@ const EditProfile = () => {
         fileFormData.append("lastname", lastname);
         fileFormData.append("email", email);
         fileFormData.append("accountType", accountType);
+
+        const authToken = JSON.parse(localStorage.getItem('token'));
 
         try {
             if (authToken) {

@@ -1,9 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const authMiddleware = (req, res, next) => {
-    let token = req.headers["authorization"];
-
-    token = token.split(' ')[1];
+    let token = req.headers.authorization.split(' ')[1];
 
     if (!token) {
         return res
@@ -12,7 +10,6 @@ const authMiddleware = (req, res, next) => {
     }
 
     try {
-        token
         const decoded = jwt.verify(
             token,
             "urbannestjwttoken"

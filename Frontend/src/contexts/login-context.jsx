@@ -11,8 +11,6 @@ export const LoginProvider = ({ children }) => {
         localStorage.setItem(item, JSON.stringify(data));
     const removeLocalStorageItem = (item) => localStorage.removeItem(item);
 
-    const [authToken, setAuthToken] = useState(token);
-
     const user = JSON.parse(localStorage.getItem("currentUser"));
     const [currentUser, setCurrentUser] = useState(user);
 
@@ -29,8 +27,6 @@ export const LoginProvider = ({ children }) => {
                 setCurrentUser,
                 adminToken,
                 setAdminToken,
-                authToken,
-                setAuthToken,
                 setLocalStorageItem,
                 removeLocalStorageItem,
             }}

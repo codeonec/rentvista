@@ -23,7 +23,6 @@ const CreateListing = () => {
         images: [],
     };
 
-    const { authToken } = useLogin();
     const [formData, setFormData] = useState(initialFormData);
     const imageRef = useRef(null);
     const navigate = useNavigate();
@@ -99,6 +98,8 @@ const CreateListing = () => {
             formDataObject.append('images', item)
         });
 
+        const authToken = JSON.parse(localStorage.getItem('token'));
+
         const createListing = () => {
             try {
                 if (formData.images.length < 1) return setError('You must upload atleast one image');
@@ -106,6 +107,7 @@ const CreateListing = () => {
 
                 setError("");
                 setLoading(true);
+
                 fetch('http://localhost:5000/listing/auth/create', {
                     method: 'POST',
                     headers: {

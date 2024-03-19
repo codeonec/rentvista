@@ -5,16 +5,18 @@ import { Link } from "react-router-dom";
 import Loading from "../components/Loading";
 
 const MyListings = () => {
-    const { currentUser, authToken } = useLogin();
+    const { currentUser } = useLogin();
     const [userListings, setUserListings] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const getUserListings = async () => {
+            const token = JSON.parse(localStorage.getItem("token"));
+
             try {
                 const response = await fetch(`http://localhost:5000/listing/auth/user-listing/${currentUser._id}`, {
                     headers: {
-                        'Authorization': `Bearer ${authToken}`,
+                        'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json'
                     }
                 });
@@ -31,7 +33,7 @@ const MyListings = () => {
         };
 
         getUserListings();
-    }, [authToken, currentUser._id]);
+    }, [currentUser._id]);
 
     if (isLoading) {
         return <Loading />;

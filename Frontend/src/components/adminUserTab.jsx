@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
     Button,
     ButtonGroup,
@@ -25,13 +25,14 @@ const AdminUserTab = () => {
     };
 
     const fetchUsers = async () => {
+        const adminToken = JSON.parse(localStorage.getItem("adminToken"));
+
         try {
             const response = await fetch("http://localhost:5000/admin/users", {
                 headers: {
-                    Authorization: JSON.parse(
-                        localStorage.getItem("adminToken")
-                    ),
-                },
+                    'Authorization': adminToken,
+                    'Content-Type': 'application/json'
+                }
             });
             const data = await response.json();
 
@@ -95,7 +96,7 @@ const AdminUserTab = () => {
                         </Modal.Header>
                         <Modal.Body>
                             {selectedUser && <>
-                            <p>{selectedUser.email}</p>
+                                <p>{selectedUser.email}</p>
                             </>}
                         </Modal.Body>
                         <Modal.Footer>

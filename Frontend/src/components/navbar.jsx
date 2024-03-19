@@ -80,7 +80,7 @@ function NavBar() {
                                     </Dropdown.Item>
                                     <Dropdown.Item
                                         as={Link}
-                                        to="/admin-login"
+                                        to="/login"
                                         onClick={handleAdminLogout}
                                     >
                                         Logout

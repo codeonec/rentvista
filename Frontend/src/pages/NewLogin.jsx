@@ -42,9 +42,7 @@ const NewLogin = () => {
 
                 const from = location?.state?.from?.pathname || "/";
 
-                setTimeout(() => {
-                    navigate(from, { replace: true });
-                }, 1000);
+                navigate(from, { replace: true });
             } else {
                 console.error("Login failed:", data.error);
                 setIsLoggedIn(false);

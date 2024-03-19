@@ -1,4 +1,4 @@
-import NavBar from "./components/Navbar";
+import NavBar from "./components/navbar";
 import { Route, Routes } from "react-router-dom";
 import Services from "./pages/Services";
 import ContactUs from "./pages/ContactUs";
@@ -7,13 +7,15 @@ import Home from "./pages/Home";
 import NewLogin from "./pages/NewLogin";
 import NewProfile from "./pages/NewProfile";
 import EditProfile from "./pages/EditProfile";
-import PrivateRoute from "./components/PrivateRoute";
+import { PrivateRoute, AdminRoute } from "./components/PrivateRoute";
 import PageNotFound from "./pages/PageNotFound";
 import ForgotPasswordForm from "./pages/forgotPassword";
 import ResetPasswordPage from "./pages/resetPassword";
 import CreateListing from "./pages/CreateListing";
 import Listings from "./pages/Listings";
 import MyListings from "./pages/MyListings";
+import AdminLogin from "./pages/AdminLogin";
+import AdminDashboard from "./pages/AdminDashboard";
 
 function App() {
     return (
@@ -65,8 +67,20 @@ function App() {
                     }
                 />
                 <Route path="/contact-us" element={<ContactUs />} />
-                <Route path="/forgot-password" element={<ForgotPasswordForm />} />
+                <Route
+                    path="/forgot-password"
+                    element={<ForgotPasswordForm />}
+                />
                 <Route path="/reset-password" element={<ResetPasswordPage />} />
+                <Route path="/admin-login" element={<AdminLogin />} />
+                <Route
+                    path="/admin-dashboard"
+                    element={
+                        <AdminRoute>
+                            <AdminDashboard />
+                        </AdminRoute>
+                    }
+                />
                 <Route path="*" element={<PageNotFound />} />
             </Routes>
         </>

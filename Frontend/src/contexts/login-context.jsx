@@ -6,8 +6,9 @@ const LoginContext = createContext();
 export const LoginProvider = ({ children }) => {
     const token = JSON.parse(localStorage.getItem("token"));
 
-    const setLocalStorageItem = (item, data) => localStorage.setItem(item, JSON.stringify(data));
-    const removeLocalStorageItem = item => localStorage.removeItem(item);
+    const setLocalStorageItem = (item, data) =>
+        localStorage.setItem(item, JSON.stringify(data));
+    const removeLocalStorageItem = (item) => localStorage.removeItem(item);
 
     const [authToken, setAuthToken] = useState(token);
     const [isLoggedIn, setIsLoggedIn] = useState(!!token);
@@ -15,17 +16,27 @@ export const LoginProvider = ({ children }) => {
     const user = JSON.parse(localStorage.getItem("currentUser"));
     const [currentUser, setCurrentUser] = useState(user);
 
+    const [adminToken, setAdminToken] = useState(() => {
+        const localAdminToken = localStorage.getItem("adminToken");
+        if (localAdminToken) return localAdminToken;
+        return "";
+    });
+
     return (
-        <LoginContext.Provider value={{
-            isLoggedIn,
-            setIsLoggedIn,
-            currentUser,
-            setCurrentUser,
-            authToken,
-            setAuthToken,
-            setLocalStorageItem,
-            removeLocalStorageItem
-        }}>
+        <LoginContext.Provider
+            value={{
+                isLoggedIn,
+                setIsLoggedIn,
+                currentUser,
+                setCurrentUser,
+                adminToken,
+                setAdminToken,
+                authToken,
+                setAuthToken,
+                setLocalStorageItem,
+                removeLocalStorageItem,
+            }}
+        >
             {children}
         </LoginContext.Provider>
     );

@@ -13,6 +13,7 @@ import ForgotPasswordForm from "./pages/forgotPassword";
 import ResetPasswordPage from "./pages/resetPassword";
 import CreateListing from "./pages/CreateListing";
 import Listings from "./pages/Listings";
+import MyListings from "./pages/MyListings";
 
 function App() {
     return (
@@ -52,6 +53,14 @@ function App() {
                     element={
                         <PrivateRoute>
                             <Services />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/my-listings"
+                    element={
+                        <PrivateRoute>
+                            <MyListings />
                         </PrivateRoute>
                     }
                 />

@@ -24,7 +24,6 @@ const userLogin = async (req, res) => {
         );
 
         const { password, ...rest } = user._doc;
-        console.log(rest);
 
         res.status(200).json({ message: "User logged in successfully", token, user: rest });
     } catch (error) {

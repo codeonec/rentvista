@@ -13,13 +13,13 @@ export const LoginProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(!!token);
 
     const user = JSON.parse(localStorage.getItem("currentUser"));
-    const [currectUser, setCurrentUser] = useState(user);
+    const [currentUser, setCurrentUser] = useState(user);
 
     return (
         <LoginContext.Provider value={{
             isLoggedIn,
             setIsLoggedIn,
-            currectUser,
+            currentUser,
             setCurrentUser,
             authToken,
             setAuthToken,

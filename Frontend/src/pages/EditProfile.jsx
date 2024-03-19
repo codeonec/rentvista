@@ -5,8 +5,8 @@ import Loading from "../components/Loading";
 import { useLogin } from "../contexts/login-context";
 
 const EditProfile = () => {
-    const { currectUser, setCurrentUser, authToken, setLocalStorageItem } = useLogin();
-    const [formData, setFormData] = useState(currectUser);
+    const { currentUser, setCurrentUser, authToken, setLocalStorageItem } = useLogin();
+    const [formData, setFormData] = useState(currentUser);
     const [profilePicture, setProfilePicture] = useState(null);
     const [success, setSuccess] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -66,7 +66,7 @@ const EditProfile = () => {
         }
     };
 
-    if (!currectUser) {
+    if (!currentUser) {
         return (
             <Container>
                 <Loading />

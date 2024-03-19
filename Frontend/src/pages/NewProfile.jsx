@@ -5,10 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { useLogin } from "../contexts/login-context";
 
 const NewProfile = () => {
-    const { currectUser } = useLogin();
+    const { currentUser } = useLogin();
     const navigate = useNavigate();
 
-    if (!currectUser) {
+    if (!currentUser) {
         return (
             <Container>
                 <Loading />
@@ -16,7 +16,7 @@ const NewProfile = () => {
         )
     }
 
-    const { username, firstname, lastname, email, accountType, profilePicture } = currectUser;
+    const { username, firstname, lastname, email, accountType, profilePicture } = currentUser;
     const fullname = `${firstname} ${lastname}`;
 
     // eslint-disable-next-line react/prop-types
@@ -52,7 +52,7 @@ const NewProfile = () => {
                     <Button
                         className="w-100 my-2"
                         onClick={() => {
-                            navigate("/edit-profile", { state: currectUser });
+                            navigate("/edit-profile", { state: currentUser });
                         }}
                     >
                         Edit Profile

@@ -126,7 +126,8 @@ const CreateListing = () => {
                     setFormData(initialFormData);
                     imageRef.current.value = null;
 
-                    navigate(`/listing/${data.listing._id}`);
+                    // navigate(`/listing/${data.listing._id}`);
+                    navigate(`/my-listings/`);
                 });
             } catch (error) {
                 console.log(error);

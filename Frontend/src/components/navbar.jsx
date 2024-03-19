@@ -12,7 +12,7 @@ function NavBar() {
     const {
         isLoggedIn,
         setIsLoggedIn,
-        currectUser,
+        currentUser,
         setCurrentUser,
         removeLocalStorageItem
     } = useLogin();
@@ -52,9 +52,9 @@ function NavBar() {
                             ? (
                                 <Dropdown>
                                     <Dropdown.Toggle variant="light" id="dropdown-basic">
-                                        {`${currectUser.firstname} ${currectUser.lastname}`}
+                                        {`${currentUser.firstname} ${currentUser.lastname}`}
                                         <img
-                                            src={"http://localhost:5000/assets/uploads/" + currectUser.profilePicture}
+                                            src={"http://localhost:5000/assets/uploads/" + currentUser.profilePicture}
                                             alt="profile picture"
                                             width="30px" height="30px"
                                             style={{
@@ -66,8 +66,9 @@ function NavBar() {
                                     </Dropdown.Toggle>
 
                                     <Dropdown.Menu>
-                                        <Dropdown.Item as={Link} to="/profile">Profile</Dropdown.Item>
                                         <Dropdown.Item as={Link} to="/create-listing">Create Listing</Dropdown.Item>
+                                        <Dropdown.Item as={Link} to="/my-listings">My Listings</Dropdown.Item>
+                                        <Dropdown.Item as={Link} to="/profile">Profile</Dropdown.Item>
                                         <Dropdown.Item as={Link} to="/contact-us">Contact Us</Dropdown.Item>
                                         <Dropdown.Item as={Link} to="/login" onClick={handleLogout}>Logout</Dropdown.Item>
                                     </Dropdown.Menu>

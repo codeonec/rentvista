@@ -14,7 +14,7 @@ export const LoginProvider = ({ children }) => {
     const [authToken, setAuthToken] = useState(token);
 
     const user = JSON.parse(localStorage.getItem("currentUser"));
-    const [currectUser, setCurrentUser] = useState(user);
+    const [currentUser, setCurrentUser] = useState(user);
 
     const [adminToken, setAdminToken] = useState(localAdminToken);
 
@@ -25,7 +25,7 @@ export const LoginProvider = ({ children }) => {
             value={{
                 isLoggedIn,
                 setIsLoggedIn,
-                currectUser,
+                currentUser,
                 setCurrentUser,
                 adminToken,
                 setAdminToken,

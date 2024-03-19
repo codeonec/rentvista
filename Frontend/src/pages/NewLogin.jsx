@@ -10,7 +10,7 @@ const NewLogin = () => {
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
-    const { setIsLoggedIn, setCurrentUser, setLocalStorageItem } = useLogin();
+    const { setIsLoggedIn, setCurrentUser, setLocalStorageItem, removeLocalStorageItem } = useLogin();
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -33,6 +33,8 @@ const NewLogin = () => {
 
                 setLocalStorageItem("currentUser", data.user);
                 setCurrentUser(data.user);
+
+                removeLocalStorageItem("adminToken");
 
                 setLoading(false);
                 setSuccess(true);

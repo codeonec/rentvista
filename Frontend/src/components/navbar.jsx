@@ -12,7 +12,7 @@ function NavBar() {
     const {
         isLoggedIn,
         setIsLoggedIn,
-        currectUser,
+        currentUser,
         setCurrentUser,
         adminToken,
         setAdminToken,
@@ -35,7 +35,7 @@ function NavBar() {
         setIsLoggedIn(false);
         setAdminToken(null);
 
-        navigate("/admin-login");
+        navigate("/login");
     };
 
     return (
@@ -58,67 +58,12 @@ function NavBar() {
                         />
                     </Form>
                     <Nav>
-                        <Link to="/" className="nav-link">
-                            Home
-                        </Link>
-                        <Link to="/listings" className="nav-link">
-                            Listings
-                        </Link>
-                        <Link to="/services" className="nav-link">
-                            Services
-                        </Link>
-                        {isLoggedIn && !adminToken ? (
-                            <Dropdown>
-                                <Dropdown.Toggle
-                                    variant="light"
-                                    id="dropdown-basic"
-                                >
-                                    {`${currectUser.firstname} ${currectUser.lastname}`}
-                                    <img
-                                        src={
-                                            "http://localhost:5000/assets/uploads/" +
-                                            currectUser.profilePicture
-                                        }
-                                        alt="profile picture"
-                                        width="30px"
-                                        height="30px"
-                                        style={{
-                                            borderRadius: "40px",
-                                            marginInline: "0.5rem",
-                                            objectFit: "cover",
-                                        }}
-                                    />
-                                </Dropdown.Toggle>
+                        <Link to="/" className="nav-link">Home</Link>
+                        <Link to="/listings" className="nav-link">Listings</Link>
+                        <Link to="/services" className="nav-link">Services</Link>
 
-                                <Dropdown.Menu>
-                                    <Dropdown.Item as={Link} to="/profile">
-                                        Profile
-                                    </Dropdown.Item>
-                                    <Dropdown.Item
-                                        as={Link}
-                                        to="/create-listing"
-                                    >
-                                        Create Listing
-                                    </Dropdown.Item>
-                                    <Dropdown.Item as={Link} to="/contact-us">
-                                        Contact Us
-                                    </Dropdown.Item>
-                                    <Dropdown.Item
-                                        as={Link}
-                                        to="/login"
-                                        onClick={handleLogout}
-                                    >
-                                        Logout
-                                    </Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
-                        ) : (
-                            <Link to="/login" className="nav-link">
-                                Login
-                            </Link>
-                        )}
-                        {isLoggedIn && adminToken ? (
-                            <Dropdown>
+                        {adminToken
+                            ? <Dropdown>
                                 <Dropdown.Toggle
                                     variant="light"
                                     id="dropdown-basic"
@@ -142,13 +87,61 @@ function NavBar() {
                                     </Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
-                        ) : (
-                            ""
-                        )}
-                    </Nav>
-                </Navbar.Collapse>
-            </Container>
-        </Navbar>
+                            : isLoggedIn
+                                ? <Dropdown>
+                                    <Dropdown.Toggle
+                                        variant="light"
+                                        id="dropdown-basic"
+                                    >
+                                        {`${currentUser.firstname} ${currentUser.lastname}`}
+                                        <img
+                                            src={
+                                                "http://localhost:5000/assets/uploads/" +
+                                                currentUser.profilePicture
+                                            }
+                                            alt="profile picture"
+                                            width="30px"
+                                            height="30px"
+                                            style={{
+                                                borderRadius: "40px",
+                                                marginInline: "0.5rem",
+                                                objectFit: "cover",
+                                            }}
+                                        />
+                                    </Dropdown.Toggle>
+
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item as={Link} to="/profile">
+                                            Profile
+                                        </Dropdown.Item>
+                                        <Dropdown.Item
+                                            as={Link}
+                                            to="/create-listing"
+                                        >
+                                            Create Listing
+                                        </Dropdown.Item>
+                                        <Dropdown.Item as={Link} to="/my-listings">My Listings</Dropdown.Item>
+
+                                        <Dropdown.Item as={Link} to="/contact-us">
+                                            Contact Us
+                                        </Dropdown.Item>
+                                        <Dropdown.Item
+                                            as={Link}
+                                            to="/login"
+                                            onClick={handleLogout}
+                                        >
+                                            Logout
+                                        </Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                                : <Link to="/login" className="nav-link">
+                                    Login
+                                </Link>
+                        }
+                    </Nav >
+                </Navbar.Collapse >
+            </Container >
+        </Navbar >
     );
 }
 

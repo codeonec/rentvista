@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 
 const ResetPasswordPage = () => {
-    // const location = useLocation();
     const token = new URLSearchParams(window.location.search).get('token');
     const [resetSuccess, setResetSuccess] = useState(false);
     const [newPassword, setNewPassword] = useState("");
@@ -13,7 +12,6 @@ const ResetPasswordPage = () => {
     const handleResetPassword = async (e) => {
         e.preventDefault();
         try {
-            // Send a request to the backend to reset the password
             const response = await fetch(
                 "http://localhost:5000/user/reset-password",
                 {

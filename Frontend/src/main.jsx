@@ -8,10 +8,10 @@ import { LoginProvider } from "./contexts/login-context.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
-        <BrowserRouter>
-            <LoginProvider>
+        <LoginProvider>
+            <BrowserRouter>
                 <App />
-            </LoginProvider>
-        </BrowserRouter>
+            </BrowserRouter>
+        </LoginProvider>
     </React.StrictMode>
 );

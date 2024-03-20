@@ -3,7 +3,8 @@ const multer = require('multer');
 
 const authMiddleware = require("../middleware/authMiddleware");
 const { createListing } = require("../controllers/listingControllers/createListing");
-const { getUserListing } = require("../controllers/listingControllers/getUserListing");
+const { getUserListings } = require("../controllers/listingControllers/getUserListings");
+const { getAllListings } = require("../controllers/listingControllers/getAllListings");
 
 const router = express.Router();
 
@@ -20,6 +21,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 router.post("/auth/create", authMiddleware, upload.array('images', 5), createListing);
-router.get('/auth/user-listing/:id', authMiddleware, getUserListing);
+router.get('/auth/user-listings/:id', authMiddleware, getUserListings);
+router.get('/all-listings', getAllListings);
 
 module.exports = router;

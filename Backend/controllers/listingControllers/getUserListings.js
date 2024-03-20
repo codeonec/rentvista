@@ -1,6 +1,6 @@
 const Listing = require("../../models/Listing");
 
-const getUserListing = async (req, res) => {
+const getUserListings = async (req, res) => {
     if (req.user.userId === req.params.id) {
         const listing = await Listing.find({ userRef: req.params.id });
 
@@ -10,4 +10,4 @@ const getUserListing = async (req, res) => {
     }
 }
 
-module.exports = { getUserListing };
+module.exports = { getUserListings };

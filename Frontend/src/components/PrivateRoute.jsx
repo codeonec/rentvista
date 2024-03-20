@@ -13,6 +13,7 @@ export const PrivateRoute = ({ children }) => {
     );
 };
 
+// eslint-disable-next-line react/prop-types
 export const AdminRoute = ({ children }) => {
     const { isLoggedIn, adminToken } = useLogin();
     const location = useLocation();

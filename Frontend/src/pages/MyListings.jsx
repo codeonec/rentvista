@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import { useLogin } from "../contexts/login-context"
-import { Link } from "react-router-dom";
 import Loading from "../components/Loading";
+import ListingComponent from "../components/ListingComponent";
 
 const MyListings = () => {
     const { currentUser } = useLogin();
@@ -14,7 +14,7 @@ const MyListings = () => {
             const token = JSON.parse(localStorage.getItem("token"));
 
             try {
-                const response = await fetch(`http://localhost:5000/listing/auth/user-listing/${currentUser._id}`, {
+                const response = await fetch(`http://localhost:5000/listing/auth/user-listings/${currentUser._id}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json'
@@ -44,30 +44,7 @@ const MyListings = () => {
             <h4>My Listings ({userListings.length})</h4>
             <Row xs={1} sm={2} md={3} lg={4} xl={4} className="g-4 my-2">
                 {userListings.map((listing) => (
-                    <Col key={listing._id} className="my-3">
-                        <Link to={`/listing/${listing._id}`} className="text-decoration-none text-dark">
-                            <Card className="h-100 cursor-pointer">
-                                <Card.Img
-                                    variant="top"
-                                    src={"http://localhost:5000/assets/listings/" + (listing.imageUrls[0])}
-                                    alt={listing.title}
-                                    style={{
-                                        objectFit: "cover",
-                                        height: "200px",
-                                        borderTopLeftRadius: "5px",
-                                        borderTopRightRadius: "5px"
-                                    }}
-                                />
-                                <Card.Body className="d-flex justify-content-between flex-column">
-                                    <Card.Text>{listing.title}</Card.Text>
-                                    <Card.Text>
-                                        <span className="fw-semibold">${listing.discountPrice}{" "}</span>
-                                        <span className="text-decoration-line-through">${listing.regularPrice}</span>
-                                    </Card.Text>
-                                </Card.Body>
-                            </Card>
-                        </Link>
-                    </Col>
+                    <ListingComponent listing={listing} key={listing._id} />
                 ))}
             </Row>
         </Container>

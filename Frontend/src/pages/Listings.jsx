@@ -10,7 +10,7 @@ const Listings = () => {
     useEffect(() => {
         const getListings = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/listing/all-listings/`);
+                const response = await fetch(`http://localhost:5000/listing/get/all-listings/`);
 
                 if (!response.ok) {
                     throw new Error('Failed to fetch user listings');

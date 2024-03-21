@@ -16,6 +16,7 @@ import Listings from "./pages/Listings";
 import MyListings from "./pages/MyListings";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
+import UpdateListing from "./pages/UpdateListing";
 
 function App() {
     return (
@@ -47,6 +48,14 @@ function App() {
                     element={
                         <PrivateRoute>
                             <CreateListing />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/update-listing/:id"
+                    element={
+                        <PrivateRoute>
+                            <UpdateListing />
                         </PrivateRoute>
                     }
                 />

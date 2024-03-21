@@ -1,12 +1,13 @@
 import { useRef } from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
-const CreateListing = () => {
+const UpdateListing = () => {
     const initialFormData = {
         title: '',
         description: '',
@@ -25,8 +26,24 @@ const CreateListing = () => {
     const [formData, setFormData] = useState(initialFormData);
     const imageRef = useRef(null);
     const navigate = useNavigate();
+    const params = useParams();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+
+    const listingImageUrl = "http://localhost:5000/assets/listings/";
+
+    useEffect(() => {
+        const fetchListing = async () => {
+            const listingId = params.id;
+            const res = await fetch(`http://localhost:5000/listing/get/${listingId}`);
+            const data = await res.json();
+
+            setFormData(data);
+            setLoading(false);
+        }
+
+        fetchListing();
+    }, [params.id]);
 
     const handleChange = (e) => {
         const { id, value, type, checked } = e.target;
@@ -78,7 +95,6 @@ const CreateListing = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log({ formData })
         const formDataObject = new FormData();
 
         formDataObject.append('title', formData.title);
@@ -93,55 +109,58 @@ const CreateListing = () => {
         formDataObject.append('bedrooms', formData.bedrooms);
         formDataObject.append('bathrooms', formData.bathrooms);
 
-        Array.from(formData.imageUrls).forEach(item => {
-            formDataObject.append('imageUrls', item)
+        // Convert FileList to an array and iterate over it
+        Array.from(formData.imageUrls).forEach((file) => {
+            formDataObject.append('imageUrls', file);
         });
 
         const authToken = JSON.parse(localStorage.getItem('token'));
 
-        const createListing = () => {
+        const updateListing = async () => {
             try {
-                if (formData.imageUrls.length < 1) return setError('You must upload atleast one image');
-                if (+formData.regularPrice < +formData.discountPrice) return setError('Discount price must be lower than regular price');
+                if (formData.imageUrls.length < 1) {
+                    return setError('You must upload at least one image');
+                }
+                if (+formData.regularPrice < +formData.discountPrice) {
+                    return setError('Discount price must be lower than regular price');
+                }
 
-                setError("");
+                setError('');
                 setLoading(true);
 
-                fetch('http://localhost:5000/listing/auth/create', {
-                    method: 'POST',
+                const response = await fetch(`http://localhost:5000/listing/auth/update-listing/${params.id}`, {
+                    method: 'PUT',
                     headers: {
                         authorization: `Bearer ${authToken}`,
                     },
                     body: formDataObject,
-                }).then((response) => {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        setLoading(false);
-                        throw new Error("Failed to create listing");
-                    }
-                }).then((data) => {
-                    setLoading(false);
-                    console.log(data.listing);
-
-                    setFormData(initialFormData);
-                    imageRef.current.value = null;
-
-                    // navigate(`/listing/${data.listing._id}`);
-                    navigate(`/my-listings/`);
                 });
+
+                if (!response.ok) {
+                    throw new Error('Failed to update listing');
+                }
+
+                const data = await response.json();
+                setLoading(false);
+                console.log(data);
+
+                setFormData(initialFormData);
+                // Assuming imageRef is a ref to the input element for file upload
+                imageRef.current.value = null;
+
+                navigate(`/listings`);
             } catch (error) {
                 console.log(error);
                 setLoading(false);
             }
-        }
+        };
 
-        createListing();
+        updateListing();
     };
 
     return (
         <Container className='my-4'>
-            <h4>Create a Listing</h4>
+            <h4>Update Listing</h4>
             <Form onSubmit={handleSubmit} className='my-4'>
                 <Row>
                     <Col md={6} className="mb-3">
@@ -283,9 +302,10 @@ const CreateListing = () => {
                                             <img
                                                 className="rounded"
                                                 style={{ width: '80px', height: '60px', objectFit: 'cover' }}
-                                                src={item ? URL.createObjectURL(item) : null}
+                                                src={typeof item === 'string' ? listingImageUrl + item : URL.createObjectURL(item)}
                                                 alt={`Image ${i + 1}`}
                                             />
+
                                         </span>
                                     ))}
                                 </div>
@@ -305,7 +325,7 @@ const CreateListing = () => {
                         variant='success'
                         disabled={loading}
                     >
-                        {loading ? "Creating..." : "Create Listing"}
+                        {loading ? "Updating..." : "Update Listing"}
                     </Button>
                 </Row>
             </Form>
@@ -313,4 +333,4 @@ const CreateListing = () => {
     );
 }
 
-export default CreateListing;
+export default UpdateListing;

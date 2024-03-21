@@ -85,10 +85,12 @@ const UpdateListing = () => {
             imageRef.current.value = null;
         } else {
             setError("");
-            setFormData((prevFormData) => ({
-                ...prevFormData,
-                imageUrls: selectedFiles,
-            }))
+            if (selectedFiles.length > 0) {
+                setFormData((prevFormData) => ({
+                    ...prevFormData,
+                    imageUrls: selectedFiles,
+                }))
+            }
         }
     };
 
@@ -110,9 +112,11 @@ const UpdateListing = () => {
         formDataObject.append('bathrooms', formData.bathrooms);
 
         // Convert FileList to an array and iterate over it
-        Array.from(formData.imageUrls).forEach((file) => {
-            formDataObject.append('imageUrls', file);
-        });
+        if (formData.imageUrls.length > 0) {
+            Array.from(formData.imageUrls).forEach((file) => {
+                formDataObject.append('imageUrls', file);
+            });
+        }
 
         const authToken = JSON.parse(localStorage.getItem('token'));
 
@@ -293,7 +297,6 @@ const UpdateListing = () => {
                                     accept='image/*'
                                     multiple
                                     onChange={handleImages}
-
                                 />
 
                                 <div className="d-flex flex-wrap">

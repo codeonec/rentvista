@@ -8,7 +8,7 @@ import LOGO from "../assets/images/logo.png";
 import { useLogin } from "../contexts/login-context";
 import { Dropdown } from "react-bootstrap";
 
-function NavBar() {
+const NavBar = () => {
     const {
         isLoggedIn,
         setIsLoggedIn,
@@ -106,6 +106,8 @@ function NavBar() {
                                                 borderRadius: "40px",
                                                 marginInline: "0.5rem",
                                                 objectFit: "cover",
+                                                border: "2px solid #1e293b",
+                                                padding: "2px",
                                             }}
                                         />
                                     </Dropdown.Toggle>

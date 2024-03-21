@@ -1,7 +1,6 @@
 const Listing = require("../../models/Listing")
 
 const updateListing = async (req, res) => {
-
     const listing = await Listing.findById(req.params.id);
 
     if (!listing) {
@@ -13,9 +12,13 @@ const updateListing = async (req, res) => {
     }
 
     const filenames = req.files.map(file => file.filename);
+
     const newData = {
-        ...req.body,
-        imageUrls: filenames
+        ...req.body
+    };
+
+    if (filenames.length > 0) {
+        newData.imageUrls = filenames;
     }
 
     try {

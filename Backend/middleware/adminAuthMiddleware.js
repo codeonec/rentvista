@@ -4,8 +4,6 @@ const requireAdminAuth = (req, res, next) => {
   // Get the token from the request headers
   const token = req.headers.authorization;
 
-  console.log("admin token: " + token);
-
   if (!token) {
     return res.status(401).json({ error: 'Unauthorized - No token provided' });
   }

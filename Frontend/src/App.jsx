@@ -1,4 +1,4 @@
-import NavBar from "./components/navbar";
+import Navigation from "./components/Navigation";
 import { Route, Routes } from "react-router-dom";
 import Services from "./pages/Services";
 import ContactUs from "./pages/ContactUs";
@@ -22,7 +22,7 @@ import IndividualListing from "./pages/IndividualListing";
 function App() {
     return (
         <>
-            <NavBar />
+            <Navigation />
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<NewLogin />} />

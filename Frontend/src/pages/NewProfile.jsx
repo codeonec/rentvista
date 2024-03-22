@@ -17,7 +17,6 @@ const NewProfile = () => {
     }
 
     const { username, firstname, lastname, email, accountType, profilePicture } = currentUser;
-    const fullname = `${firstname} ${lastname}`;
 
     // eslint-disable-next-line react/prop-types
     const TextWithLabel = ({ label, text }) => {
@@ -38,7 +37,7 @@ const NewProfile = () => {
 
     return (
         <Container>
-            <h4 className="py-4">{getGreeting()}! {fullname} </h4>
+            <h4 className="py-4">{getGreeting()}! {firstname} </h4>
 
             <Row>
                 <Col md={6}>

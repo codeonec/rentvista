@@ -104,6 +104,7 @@ const Navigation = () => {
                         Create Listing
                     </Dropdown.Item>
                     <Dropdown.Item as={Link} to="/my-listings">My Listings</Dropdown.Item>
+                    <Dropdown.Item as={Link} to="/my-bookings">My Bookings</Dropdown.Item>
 
                     <Dropdown.Item as={Link} to="/contact-us">
                         Contact Us

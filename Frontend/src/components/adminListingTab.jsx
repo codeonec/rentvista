@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import {
+    Alert,
     Button,
     ButtonGroup,
     Col,
@@ -15,12 +16,14 @@ const AdminListingTab = () => {
     const adminToken = JSON.parse(localStorage.getItem("adminToken"));
     const [selectedListing, setSelectedListing] = useState(null);
     const [showModal, setShowModal] = useState(false);
+    const [error, setError] = useState("");
 
     useEffect(() => {
         fetchListings();
     }, []);
 
     const fetchListings = async () => {
+        setError("");
         try {
             const response = await fetch(
                 "http://localhost:5000/admin/listings",
@@ -34,6 +37,7 @@ const AdminListingTab = () => {
             setListings(data);
         } catch (error) {
             console.error("Error fetching listings:", error);
+            setError(error);
         }
     };
 
@@ -57,6 +61,7 @@ const AdminListingTab = () => {
     };
 
     const handleSubmit = async () => {
+        setError("");
         try {
             const response = await fetch(
                 `http://localhost:5000/admin/listings/${selectedListing._id}`,
@@ -71,19 +76,43 @@ const AdminListingTab = () => {
             );
 
             if (response.ok) {
-                // Update local state
                 const updatedListings = listings.map((l) =>
                     l._id === selectedListing._id ? selectedListing : l
                 );
                 setListings(updatedListings);
 
-                // Close the modal
                 handleCloseModal();
+            } else {
+                setError("An error occurred");
+            }
+        } catch (error) {
+            setError(error);
+        }
+    };
+
+    const handleDeleteListing = async (id) => {
+        setError("");
+        try {
+            const response = await fetch(
+                `http://localhost:5000/admin/listings/${id}`,
+                {
+                    method: "DELETE",
+                    headers: {
+                        Authorization: adminToken,
+                    },
+                }
+            );
+
+            if (response.ok) {
+                const updatedListings = listings.filter(
+                    (listing) => listing._id !== id
+                );
+                setListings(updatedListings);
             } else {
                 // Handle error response
             }
         } catch (error) {
-            console.error("Error updating listing:", error);
+            console.error("Error deleting listing:", error);
         }
     };
 
@@ -91,6 +120,8 @@ const AdminListingTab = () => {
         <Container>
             <Row>
                 <Col>
+                    {error && <Alert variant="danger">{error}.</Alert>}
+
                     <h2 className="mb-3">Listings</h2>
                     <div className="overflow-hidden rounded-3 border">
                         <Table className="rounded-4 mb-0" striped hover>
@@ -132,6 +163,11 @@ const AdminListingTab = () => {
                                                 <Button
                                                     variant="outline-danger"
                                                     size="sm"
+                                                    onClick={() =>
+                                                        handleDeleteListing(
+                                                            listing._id
+                                                        )
+                                                    }
                                                 >
                                                     Delete
                                                 </Button>
@@ -152,7 +188,7 @@ const AdminListingTab = () => {
                                 <Form>
                                     <Row>
                                         {selectedListing.imageUrls.map(
-                                            (img,i) => (
+                                            (img, i) => (
                                                 <Col key={i}>
                                                     <img
                                                         src={`http://localhost:5000/assets/listings/${img}`}

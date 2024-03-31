@@ -73,9 +73,18 @@ router.put("/listings/:id", async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
-// router.post('/listings', adminController.createListing);
-// router.put('/listings/:id', adminController.updateListing);
-// router.delete('/listings/:id', adminController.deleteListing);
+router.delete("/listings/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        await Listing.findByIdAndDelete(id);
+
+        res.status(200).json({ message: "Listing deleted successfully" });
+    } catch (error) {
+        console.error("Error deleting listing:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
 
 router.get("/users", requireAdminAuth, async (req, res) => {
     try {

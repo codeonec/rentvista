@@ -18,6 +18,7 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import UpdateListing from "./pages/UpdateListing";
 import IndividualListing from "./pages/IndividualListing";
+import MyBookings from "./pages/MyBookings";
 
 function App() {
     return (
@@ -73,6 +74,14 @@ function App() {
                     element={
                         <PrivateRoute>
                             <MyListings />
+                        </PrivateRoute>
+                    }
+                />
+                 <Route
+                    path="/my-bookings"
+                    element={
+                        <PrivateRoute>
+                            <MyBookings />
                         </PrivateRoute>
                     }
                 />

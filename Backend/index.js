@@ -22,7 +22,7 @@ app.use("/admin", adminRoutes);
 app.use("/booking", bookingRouter);
 
 // const URI = "mongodb+srv://rpatel0083:UrbanNest1@urbannest.3gm8btz.mongodb.net/?retryWrites=true&w=majority";
-const URI = "mongodb+srv://hrshmistry:Conestoga8670@cluster0.rupceib.mongodb.net/UrbanNestDB?retryWrites=true&w=majority";
+const URI = "mongodb+srv://rpatel0083:UrbanNest1@urbannest.3gm8btz.mongodb.net/?retryWrites=true&w=majority";
 
 const OPTIONS = {
     useNewUrlParser: true,

@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const Booking = require("../models/Booking");
+const authMiddleware = require("../middleware/authMiddleware");
 
-router.get("/availability/:propertyId", async (req, res) => {
+router.get("/availability/:propertyId", authMiddleware, async (req, res) => {
     try {
         const { propertyId } = req.params;
         const { startDate, endDate } = req.query;
@@ -44,7 +45,7 @@ router.get("/availability/:propertyId", async (req, res) => {
     }
 });
 
-router.post("/new", async (req, res) => {
+router.post("/new", authMiddleware, async (req, res) => {
     try {
         const { userID, propertyID, checkInDate, checkOutDate, totalPrice } =
             req.body;
@@ -68,6 +69,22 @@ router.post("/new", async (req, res) => {
         });
     } catch (error) {
         console.error("Error creating booking:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+router.get("/", authMiddleware, async (req, res) => {
+    try {
+        // Retrieve user ID from request
+        const userID = req.user.userId; // Assuming you have implemented authentication middleware
+
+        // Find bookings associated with the user ID
+        const bookings = await Booking.find({ userId: userID });
+        console.log({ bookings, userID });
+
+        res.status(200).json({ bookings });
+    } catch (error) {
+        console.error("Error fetching user bookings:", error);
         res.status(500).json({ error: "Internal Server Error" });
     }
 });

@@ -9,11 +9,18 @@ const BookingModal = ({ showModal, onCloseModal, listingId }) => {
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [availableDates, setAvailableDates] = useState([]);
+    const authToken = JSON.parse(localStorage.getItem("token"));
 
     const fetchAvailableDates = async () => {
         try {
             const response = await fetch(
-                `http://localhost:5000/booking/availability/${listingId}`
+                `http://localhost:5000/booking/availability/${listingId}`,
+                {
+                    method: "Get",
+                    headers: {
+                        authorization: `Bearer ${authToken}`,
+                    },
+                }
             );
             const data = await response.json();
             console.log(data);
@@ -32,13 +39,14 @@ const BookingModal = ({ showModal, onCloseModal, listingId }) => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    authorization: `Bearer ${authToken}`,
                 },
                 body: JSON.stringify({
                     userID: currentUser._id,
                     propertyID: listingId,
                     checkInDate: startDate.toISOString(),
                     checkOutDate: endDate.toISOString(),
-                    totalPrice: 255, 
+                    totalPrice: 255,
                 }),
             });
 
@@ -97,10 +105,7 @@ const BookingModal = ({ showModal, onCloseModal, listingId }) => {
                 <Button variant="secondary" onClick={onCloseModal}>
                     Close
                 </Button>
-                <Button
-                    variant="primary"
-                    onClick={handleSubmit}
-                >
+                <Button variant="primary" onClick={handleSubmit}>
                     Submit
                 </Button>
             </Modal.Footer>

@@ -13,7 +13,7 @@ const Home = () => {
                         <div style={{ textAlign: 'center' }}>
                             <h1>Welcome to UrbanNest</h1>
                             <p className="fs-5">
-                                Your trusted partner in finding your dream home. Whether you are looking for a cozy apartment, a spacious house, or a luxury villa, we have something for everyone. Let us help you make your dream a reality.
+                                Your trusted partner in finding your dream home. Whether you are looking for a cozy apartment, a spacious house, or a luxury villa, we have something for everyone. Let us help you make your dream a reality with this platform.
                             </p>
                         </div>
                     </Col>

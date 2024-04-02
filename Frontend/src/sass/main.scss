@@ -1,0 +1,19 @@
+// @import url(https://fonts.googleapis.com/css?family=Nunito:200,300,400,700);
+// $font-family-base:Nunito;
+// @import url(https://fonts.googleapis.com/css?family=Crete+Round:200,300,400,700);
+// $headings-font-family:Crete Round;
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+$enable-grid-classes:false;
+$primary:#083358;
+$secondary:rgb(8, 51, 88, 0.7);
+$success:#0074E4;
+$danger:#FF4057;
+$info:#74DBEF;
+$warning:#FC3C3C;
+$light:#F2F2F0;
+$dark:#072247;
+
+// import bootstrap 
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";

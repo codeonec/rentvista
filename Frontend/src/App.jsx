@@ -19,6 +19,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import UpdateListing from "./pages/UpdateListing";
 import IndividualListing from "./pages/IndividualListing";
 import MyBookings from "./pages/MyBookings";
+import Footer from "./components/Footer";
 
 function App() {
     return (
@@ -77,7 +78,7 @@ function App() {
                         </PrivateRoute>
                     }
                 />
-                 <Route
+                <Route
                     path="/my-bookings"
                     element={
                         <PrivateRoute>
@@ -106,6 +107,7 @@ function App() {
                 />
                 <Route path="*" element={<PageNotFound />} />
             </Routes>
+            <Footer />
         </>
     );
 }

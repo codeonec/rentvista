@@ -122,7 +122,11 @@ const Navigation = () => {
     }
 
     return (
-        <Navbar expand="lg" className="bg-body-tertiary shadow-sm" sticky="top">
+        <Navbar
+            expand="lg"
+            className="bg-body-tertiary shadow-sm"
+            sticky="top"
+        >
             <Container>
                 <Link to="/" className="navbar-brand">
                     <img src={LOGO} width="170px" height="40px" alt="UrbanNest" className="m-1" />
@@ -143,7 +147,7 @@ const Navigation = () => {
                     <Nav>
                         <Link to="/" className="nav-link">Home</Link>
                         <Link to="/listings" className="nav-link">Listings</Link>
-                        <Link to="/services" className="nav-link">Services</Link>
+                        {/* <Link to="/services" className="nav-link">Services</Link> */}
 
                         {adminToken
                             ? <AdminLinks />

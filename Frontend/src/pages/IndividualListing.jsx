@@ -76,7 +76,7 @@ const IndividualListing = () => {
                             <span className="fw-semibold fs-3">
                                 ${listing.discountPrice}{" "}
                             </span>
-                            {/* <span className="text-decoration-line-through">${listing.regularPrice}</span> */}
+                            <span className="text-decoration-line-through fs-6 fw-semibold">${listing.regularPrice}</span>
                             <span>{listing.type === "rent" && "/ Month"}</span>
                         </div>
                         <span>
@@ -177,7 +177,7 @@ const IndividualListing = () => {
                             </div>
                         </div>
 
-                        {listing.userRef === currentUser._id && (
+                        {listing.userRef === currentUser?._id && (
                             <Button
                                 as={Link}
                                 to={`/update-listing/${listing._id}`}

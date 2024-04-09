@@ -4,6 +4,7 @@ import { Button, Modal } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useLogin } from "../contexts/login-context";
+import { loadStripe } from '@stripe/stripe-js';
 
 const BookingModal = ({ showModal, onCloseModal, listingId }) => {
     const { currentUser } = useLogin();
@@ -31,11 +32,38 @@ const BookingModal = ({ showModal, onCloseModal, listingId }) => {
         }
     };
 
-    const handleSubmit = async () => {
-        try {
-            // Perform validation here if needed
+    const makePayment = async () => {
+        const stripe = await loadStripe("pk_test_51P3lmWBbv8rvOm4IigzxbKHxPRqmv5WFkAxios0x8U7pTHAQpo1ImrHoDjHwePRMVrgkAemlK9VdCeFyApPK4Rn700TY2Bc4Yf");
 
-            // Send a request to create the booking
+        const response = await fetch("http://localhost:5000/booking/create-checkout-session", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ listingId })
+        });
+
+        const session = await response.json();
+
+        const result = stripe.redirectToCheckout(
+            { sessionId: session.id }
+        );
+
+        if (result.error) {
+            console.log(result.error.message);
+        }
+    }
+
+    const handleSubmit = async () => {
+        if (!startDate || !endDate) {
+            // If either start date or end date is not selected, do not proceed
+            console.log("Please select both check-in and check-out dates.");
+            return;
+        }
+
+        try {
+            makePayment();
+
             const response = await fetch("http://localhost:5000/booking/new/", {
                 method: "POST",
                 headers: {
@@ -65,6 +93,11 @@ const BookingModal = ({ showModal, onCloseModal, listingId }) => {
             console.error("Error creating booking:", error.message);
         }
     };
+
+    <Button variant="primary" onClick={handleSubmit}>
+        Checkout
+    </Button>
+
 
     useEffect(() => {
         fetchAvailableDates();
@@ -106,7 +139,7 @@ const BookingModal = ({ showModal, onCloseModal, listingId }) => {
                 <Button variant="secondary" onClick={onCloseModal}>
                     Close
                 </Button>
-                <Button variant="primary" onClick={handleSubmit}>
+                <Button variant="primary" onClick={handleSubmit} >
                     Checkout
                 </Button>
             </Modal.Footer>

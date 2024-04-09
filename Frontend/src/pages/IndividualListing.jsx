@@ -72,7 +72,7 @@ const IndividualListing = () => {
         <Container className="my-3">
             {error && <div className="fw-semibold fs-3">{error}</div>}
             <Carousel fade data-bs-theme="dark" className="my-3">
-                {listing.imageUrls.map((image, i) => (
+                {listing?.imageUrls?.map((image, i) => (
                     <Carousel.Item key={i}>
                         <img
                             className="d-block w-100"
@@ -129,7 +129,7 @@ const IndividualListing = () => {
                                 Save <FaHeart />
                             </Button>
 
-                            <BookingMwodal
+                            <BookingModal
                                 showModal={showBookingModal}
                                 onCloseModal={handleCloseModal}
                                 listingId={params.id}

@@ -20,6 +20,8 @@ import UpdateListing from "./pages/UpdateListing";
 import IndividualListing from "./pages/IndividualListing";
 import MyBookings from "./pages/MyBookings";
 import Footer from "./components/Footer";
+import Success from "./pages/Success";
+import Cancel from "./pages/Cancel";
 
 function App() {
     return (
@@ -83,6 +85,22 @@ function App() {
                     element={
                         <PrivateRoute>
                             <MyBookings />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/success"
+                    element={
+                        <PrivateRoute>
+                            <Success />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/cancel"
+                    element={
+                        <PrivateRoute>
+                            <Cancel />
                         </PrivateRoute>
                     }
                 />

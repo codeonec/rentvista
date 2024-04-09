@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Booking = require("../models/Booking");
 const authMiddleware = require("../middleware/authMiddleware");
+const Listing = require("../models/Listing");
 
 router.get("/availability/:propertyId", authMiddleware, async (req, res) => {
     try {
@@ -86,6 +87,50 @@ router.get("/", authMiddleware, async (req, res) => {
     } catch (error) {
         console.error("Error fetching user bookings:", error);
         res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+const stripe = require('stripe')("sk_test_51P3lmWBbv8rvOm4Io827iSlcYQtba1e45SOLKBiNkshiwioXdNKoRKRgryY4D4gp9d7BosyQrL11NZ2gYFgrku7o00ZBTP36jg");
+
+router.post("/create-checkout-session", async (req, res) => {
+    const { listingId } = req.body;
+
+    try {
+        // Retrieve the listing from the database
+        const listing = await Listing.findById(listingId);
+
+        // Ensure the listing exists
+        if (!listing) {
+            return res.status(404).json({ error: 'Listing not found' });
+        }
+
+        // Construct line items for the checkout session
+        const lineItems = [{
+            price_data: {
+                currency: "cad",
+                product_data: {
+                    name: listing.title
+                },
+                unit_amount: Math.round((listing.discountPrice ? listing.discountPrice : listing.regularPrice) * 100),
+            },
+            quantity: 1,
+        }];
+
+        // Create a checkout session with Stripe
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ["card"],
+            line_items: lineItems,
+            mode: "payment",
+            success_url: `http://127.0.0.1:5173/success`,
+            cancel_url: `http://127.0.0.1:5173/cancel`,
+        });
+
+        // Send the session ID back to the client
+        res.status(200).json({ id: session.id });
+    } catch (error) {
+        // Handle any errors that occur during the process
+        console.error("Error creating checkout session:", error);
+        res.status(500).json({ error: 'Internal server error' });
     }
 });
 

@@ -1,10 +1,8 @@
 const User = require("../../models/User");
 
-const userProfile = async (req, res) => {
+const getUser = async (req, res) => {
     try {
-        const userId = req.user.userId;
-        const user = await User.findById(userId);
-
+        const user = await User.findById(req.params.id);
         const { password, ...rest } = user._doc;
 
         res.json({ user: rest });
@@ -14,4 +12,4 @@ const userProfile = async (req, res) => {
     }
 }
 
-module.exports = { userProfile }
+module.exports = { getUser }

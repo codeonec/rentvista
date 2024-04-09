@@ -7,6 +7,7 @@ const { userLogin } = require("../controllers/userControllers/userLogin");
 const { userProfile } = require("../controllers/userControllers/userProfile");
 const { userEditProfile } = require("../controllers/userControllers/userEditProfile");
 const { forgotPassword, resetPassword } = require("../controllers/userControllers/userPasswordReset");
+const { getUser } = require("../controllers/userControllers/getUser");
 
 const router = express.Router();
 
@@ -25,6 +26,7 @@ const upload = multer({ storage: storage });
 router.post("/register", userRegister);
 router.post("/login", userLogin);
 router.get("/auth/profile", authMiddleware, userProfile);
+router.get("/:id", getUser);
 router.post("/auth/edit-profile", authMiddleware, upload.single("profilePicture"), userEditProfile);
 router.post("/forgot-password", forgotPassword);
 router.post("/reset-password", resetPassword);

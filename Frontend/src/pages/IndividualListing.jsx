@@ -9,6 +9,7 @@ import BookingModal from "../components/bookingModal";
 
 const IndividualListing = () => {
     const [listing, setListing] = useState([]);
+    const [listedBy, setListedBy] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
     const [showBookingModal, setShowBookingModal] = useState(false);
@@ -39,8 +40,27 @@ const IndividualListing = () => {
             }
         };
 
+        const fetchUser = async () => {
+            try {
+                if (listing?.userRef) {
+                    const response = await fetch(`http://localhost:5000/user/${listing?.userRef}`);
+
+                    if (!response.ok) {
+                        throw new Error("Something went wrong");
+                    }
+
+                    const data = await response.json();
+                    console.log({ data })
+                    setListedBy(data.user);
+                }
+            } catch (error) {
+                console.log(error.message);
+            }
+        }
+
         fetchIndividualListing();
-    }, [params.id]);
+        fetchUser();
+    }, [params.id, listing?.userRef]);
 
     if (isLoading) {
         return <Loading />;
@@ -90,21 +110,25 @@ const IndividualListing = () => {
                         </div>
 
                         <div className="d-flex justify-content-start align-items-center gap-2 my-3">
-                            <span className="text">
-                                {listing.type === "sale" ? (
-                                    <Button>
-                                        <span>Buy Now</span>
-                                    </Button>
-                                ) : (
-                                    <Button onClick={handleOpenModal}>
-                                        <span>Rent Now</span>
-                                    </Button>
-                                )}
-                            </span>
+                            {listing.userRef === currentUser?._id
+                                ? null
+                                : <span className="text">
+                                    {listing.type === "sale" ? (
+                                        <Button>
+                                            <span>Buy Now</span>
+                                        </Button>
+                                    ) : (
+                                        <Button onClick={handleOpenModal}>
+                                            <span>Rent Now</span>
+                                        </Button>
+                                    )}
+                                </span>
+                            }
 
                             <Button>
-                                <FaHeart />
+                                Save <FaHeart />
                             </Button>
+
                             <BookingModal
                                 showModal={showBookingModal}
                                 onCloseModal={handleCloseModal}
@@ -137,8 +161,8 @@ const IndividualListing = () => {
                                     }}
                                 />
                                 <div>
-                                    {listing.bedrooms}{" "}
-                                    {listing.bedrooms > 1 ? "Baths" : "Bath"}
+                                    {listing.bathrooms}{" "}
+                                    {listing.bathrooms > 1 ? "Baths" : "Bath"}
                                 </div>
                             </div>
 
@@ -174,6 +198,28 @@ const IndividualListing = () => {
                                     }}
                                 />
                                 <div> {listing.gym ? "Gym" : "No Gym"}</div>
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        <span className="fw-bold">Listed By</span>
+                        <div className="mx-2 my-3">
+                            <div className="d-flex gap-3 align-items-center">
+                                <img
+                                    src={"http://localhost:5000/assets/uploads/" + listedBy?.profilePicture}
+                                    alt="profile photo"
+                                    className="shadow-sm"
+                                    style={{
+                                        width: "50px",
+                                        height: "50px",
+                                        objectFit: "cover",
+                                        borderRadius: "100px"
+                                    }}
+                                />
+                                <div className="fw-semibold">
+                                    {listedBy?.firstname} {listedBy?.lastname}
+                                </div>
                             </div>
                         </div>
 

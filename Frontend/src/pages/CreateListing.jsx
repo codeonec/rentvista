@@ -302,7 +302,7 @@ const CreateListing = () => {
                     <Button
                         type="submit"
                         onSubmit={handleSubmit}
-                        variant='success'
+                        variant='primary'
                         disabled={loading}
                     >
                         {loading ? "Creating..." : "Create Listing"}

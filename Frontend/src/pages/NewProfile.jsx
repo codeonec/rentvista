@@ -57,7 +57,7 @@ const NewProfile = () => {
                         Edit Profile
                     </Button>
                     <Button
-                        variant="success"
+                        variant="secondary"
                         className="w-100 my-2"
                         onClick={() => {
                             navigate("/create-listing");

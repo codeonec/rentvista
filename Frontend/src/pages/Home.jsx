@@ -1,5 +1,5 @@
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
-import backgroundImage from "../assets/images/dtk.jpg";
+import backgroundImage from "../assets/images/1.webp";
 import { Link } from "react-router-dom";
 
 const Home = () => {
@@ -23,21 +23,21 @@ const Home = () => {
                     </Col>
                 </Row>
                 <Row className="my-5">
-                    <Col md={4} className="text-center">
+                    <Col md={4} className="text-center mt-3">
                         <h2>Featured Properties</h2>
                         <p>Explore our handpicked selection of featured properties</p>
                         <Link to="/featured">
                             <Button variant="primary">View Featured Properties</Button>
                         </Link>
                     </Col>
-                    <Col md={4} className="text-center">
+                    <Col md={4} className="text-center mt-3">
                         <h2>Find an Agent</h2>
                         <p>Connect with one of our experienced agents</p>
                         <Link to="/agents">
                             <Button variant="primary">Find an Agent</Button>
                         </Link>
                     </Col>
-                    <Col md={4} className="text-center">
+                    <Col md={4} className="text-center mt-3">
                         <h2>Resources</h2>
                         <p>Explore our resources for buyers and sellers</p>
                         <Link to="/resources">

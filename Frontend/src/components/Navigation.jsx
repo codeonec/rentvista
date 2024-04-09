@@ -69,55 +69,59 @@ const Navigation = () => {
 
     const UserLinks = () => {
         return (
-            <Dropdown>
-                <Dropdown.Toggle
-                    variant="light"
-                    id="dropdown-basic"
-                >
-                    {`${currentUser.firstname} ${currentUser.lastname}`}
-                    <img
-                        src={
-                            "http://localhost:5000/assets/uploads/" +
-                            currentUser.profilePicture
-                        }
-                        alt="profile picture"
-                        width="32px"
-                        height="32px"
-                        style={{
-                            borderRadius: "40px",
-                            marginInline: "0.5rem",
-                            objectFit: "cover",
-                            border: "2px solid #1e293b",
-                            padding: "2px",
-                        }}
-                    />
-                </Dropdown.Toggle>
+            <div className="d-flex">
+                <Link to="/my-bookings" className="nav-link">Bookings</Link>
 
-                <Dropdown.Menu>
-                    <Dropdown.Item as={Link} to="/profile">
-                        Profile
-                    </Dropdown.Item>
-                    <Dropdown.Item
-                        as={Link}
-                        to="/create-listing"
+                <Dropdown>
+                    <Dropdown.Toggle
+                        variant="light"
+                        id="dropdown-basic"
                     >
-                        Create Listing
-                    </Dropdown.Item>
-                    <Dropdown.Item as={Link} to="/my-listings">My Listings</Dropdown.Item>
-                    <Dropdown.Item as={Link} to="/my-bookings">My Bookings</Dropdown.Item>
+                        {`${currentUser.firstname} ${currentUser.lastname}`}
+                        <img
+                            src={
+                                "http://localhost:5000/assets/uploads/" +
+                                currentUser.profilePicture
+                            }
+                            alt="profile picture"
+                            width="32px"
+                            height="32px"
+                            style={{
+                                borderRadius: "40px",
+                                marginInline: "0.5rem",
+                                objectFit: "cover",
+                                border: "2px solid #1e293b",
+                                padding: "2px",
+                            }}
+                        />
+                    </Dropdown.Toggle>
 
-                    <Dropdown.Item as={Link} to="/contact-us">
-                        Contact Us
-                    </Dropdown.Item>
-                    <Dropdown.Item
-                        as={Link}
-                        to="/login"
-                        onClick={handleLogout}
-                    >
-                        Logout
-                    </Dropdown.Item>
-                </Dropdown.Menu>
-            </Dropdown>
+                    <Dropdown.Menu>
+                        <Dropdown.Item as={Link} to="/profile">
+                            Profile
+                        </Dropdown.Item>
+                        <Dropdown.Item
+                            as={Link}
+                            to="/create-listing"
+                        >
+                            Create Listing
+                        </Dropdown.Item>
+                        <Dropdown.Item as={Link} to="/my-listings">My Listings</Dropdown.Item>
+                        <Dropdown.Item as={Link} to="/my-bookings">My Bookings</Dropdown.Item>
+
+                        <Dropdown.Item as={Link} to="/contact-us">
+                            Contact Us
+                        </Dropdown.Item>
+                        <Dropdown.Item
+                            as={Link}
+                            to="/login"
+                            onClick={handleLogout}
+                        >
+                            Logout
+                        </Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+            </div>
         )
     }
 

@@ -113,7 +113,7 @@ const IndividualListing = () => {
                             {listing.userRef === currentUser?._id
                                 ? null
                                 : <span className="text">
-                                    {listing.type === "sale" ? (
+                                    {listing.type === "sell" ? (
                                         <Button>
                                             <span>Buy Now</span>
                                         </Button>
@@ -129,7 +129,7 @@ const IndividualListing = () => {
                                 Save <FaHeart />
                             </Button>
 
-                            <BookingModal
+                            <BookingMwodal
                                 showModal={showBookingModal}
                                 onCloseModal={handleCloseModal}
                                 listingId={params.id}

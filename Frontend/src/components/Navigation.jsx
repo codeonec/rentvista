@@ -70,7 +70,7 @@ const Navigation = () => {
     const UserLinks = () => {
         return (
             <div className="d-flex">
-                <Link to="/my-bookings" className="nav-link">Bookings</Link>
+                {/* <Link to="/my-bookings" className="nav-link">Bookings</Link> */}
 
                 <Dropdown>
                     <Dropdown.Toggle
@@ -149,9 +149,8 @@ const Navigation = () => {
                         />
                     </Form>
                     <Nav>
-                        <Link to="/" className="nav-link">Home</Link>
-                        <Link to="/listings" className="nav-link">Listings</Link>
-                        {/* <Link to="/services" className="nav-link">Services</Link> */}
+                        <Link to="/listings/sell" className="nav-link">For Sell</Link>
+                        <Link to="/listings/rent" className="nav-link">For Rent</Link>
 
                         {adminToken
                             ? <AdminLinks />

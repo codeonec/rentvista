@@ -32,15 +32,15 @@ const CreateListing = () => {
         const { id, value, type, checked } = e.target;
 
         if (type === 'checkbox') {
-            if (id === 'sale') {
+            if (id === 'sell') {
                 setFormData((prevFormData) => ({
                     ...prevFormData,
-                    type: checked ? 'sale' : 'rent',
+                    type: checked ? 'sell' : 'rent',
                 }));
             } else if (id === 'rent') {
                 setFormData((prevFormData) => ({
                     ...prevFormData,
-                    type: checked ? 'rent' : 'sale',
+                    type: checked ? 'rent' : 'sell',
                 }));
             } else {
                 setFormData((prevFormData) => ({
@@ -178,10 +178,10 @@ const CreateListing = () => {
                         <Form.Group className="my-4 d-flex flex-wrap gap-3">
                             <Form.Check
                                 type="checkbox"
-                                label="Sale"
+                                label="Sell"
                                 className='fw-semibold'
-                                id="sale"
-                                checked={formData.type === 'sale'}
+                                id="sell"
+                                checked={formData.type === 'sell'}
                                 onChange={handleChange}
                             />
                             <Form.Check

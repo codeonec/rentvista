@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -106,7 +107,7 @@ const BookingModal = ({ showModal, onCloseModal, listingId }) => {
                     Close
                 </Button>
                 <Button variant="primary" onClick={handleSubmit}>
-                    Submit
+                    Checkout
                 </Button>
             </Modal.Footer>
         </Modal>

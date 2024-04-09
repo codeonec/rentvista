@@ -1,11 +1,10 @@
-// BookingsPage.js
-
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Container, ListGroup } from "react-bootstrap";
 
 const MyBookings = () => {
     const [bookings, setBookings] = useState([]);
     const authToken = JSON.parse(localStorage.getItem("token"));
+
     const fetchBookings = async () => {
         try {
             const response = await fetch("http://localhost:5000/booking", {
@@ -34,9 +33,9 @@ const MyBookings = () => {
             <ListGroup>
                 {bookings.map((booking) => (
                     <ListGroup.Item key={booking._id}>
-                        <strong>Property: </strong> {booking.propertyId}<br/>
-                        <strong>Check In: </strong>{new Date(booking.checkInDate).toLocaleDateString()} <strong>Check Out: </strong> {new Date(booking.checkOutDate).toLocaleDateString()}<br/>
-                        <strong>Booked On:</strong> {new Date(booking.bookingDate).toLocaleDateString()} at {new Date(booking.bookingDate).toLocaleTimeString()}<br/>
+                        <strong>Property: </strong> {booking.propertyId}<br />
+                        <strong>Check In: </strong>{new Date(booking.checkInDate).toLocaleDateString()} <strong>Check Out: </strong> {new Date(booking.checkOutDate).toLocaleDateString()}<br />
+                        <strong>Booked On:</strong> {new Date(booking.bookingDate).toLocaleDateString()} at {new Date(booking.bookingDate).toLocaleTimeString()}<br />
                         <strong>Status:</strong> {booking.bookingStatus}
 
                     </ListGroup.Item>

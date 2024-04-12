@@ -4,9 +4,10 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const Listing = require("../models/Listing");
+const Booking = require("../models/Booking");
 const requireAdminAuth = require("../middleware/adminAuthMiddleware");
 
-router.get("/listings", async (req, res) => {
+router.get("/listings", requireAdminAuth, async (req, res) => {
     try {
         // Fetch all listings from the database
         const listings = await Listing.find();
@@ -19,7 +20,7 @@ router.get("/listings", async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
-router.put("/listings/:id", async (req, res) => {
+router.put("/listings/:id", requireAdminAuth, async (req, res) => {
     try {
         const { id } = req.params;
         const {
@@ -73,7 +74,7 @@ router.put("/listings/:id", async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
-router.delete("/listings/:id", async (req, res) => {
+router.delete("/listings/:id", requireAdminAuth, async (req, res) => {
     try {
         const { id } = req.params;
 
@@ -116,7 +117,7 @@ router.put("/users/:id", requireAdminAuth, async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
-router.delete("/users/:id", async (req, res) => {
+router.delete("/users/:id", requireAdminAuth, async (req, res) => {
     const { id } = req.params;
 
     try {
@@ -164,5 +165,39 @@ router.post("/login", async (req, res) => {
     }
 });
 
-module.exports = router;
+router.get("/bookings", requireAdminAuth, async (req, res) => {
+    try {
+        const bookings = await Booking.find();
+        res.json(bookings);
+    } catch (error) {
+        console.error("Error listing bookings:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
 
+router.put("/bookings/:id", requireAdminAuth, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updatedBooking = req.body; // Assuming req.body contains updated booking data
+        const result = await Booking.findByIdAndUpdate(id, updatedBooking, {
+            new: true,
+        });
+        res.json(result);
+    } catch (error) {
+        console.error("Error updating booking:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+router.delete("/bookings/:id", requireAdminAuth, async (req, res) => {
+    try {
+        const { id } = req.params;
+        await Booking.findByIdAndDelete(id);
+        res.json({ message: "Booking deleted successfully" });
+    } catch (error) {
+        console.error("Error deleting booking:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+module.exports = router;

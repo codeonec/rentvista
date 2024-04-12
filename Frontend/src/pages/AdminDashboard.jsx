@@ -1,6 +1,7 @@
 import { Col, Container, Row, Tab, Tabs } from "react-bootstrap";
 import AdminUserTab from "../components/adminUserTab";
 import AdminListingTab from "../components/adminListingTab";
+import AdminBookingTab from "../components/adminBookingTab";
 
 const AdminDashboard = () => {
     return (
@@ -19,6 +20,9 @@ const AdminDashboard = () => {
                             </Tab>
                             <Tab eventKey="listing" title="Listings">
                                 <AdminListingTab />
+                            </Tab>
+                            <Tab eventKey="booking" title="Bookings">
+                                <AdminBookingTab />
                             </Tab>
                         </Tabs>
                     </Col>

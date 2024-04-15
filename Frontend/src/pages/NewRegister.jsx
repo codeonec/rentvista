@@ -13,7 +13,7 @@ const NewRegister = () => {
     const registerUser = async (values) => {
         try {
             const response = await fetch(
-                "http://localhost:5000/user/register",
+                `${import.meta.env.VITE_URBANNEST_API}/user/register`,
                 {
                     method: "POST",
                     headers: {

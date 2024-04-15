@@ -69,7 +69,7 @@ const NewProfile = () => {
 
                 <Col md={4} className="d-flex justify-content-center align-items-start">
                     <img
-                        src={"http://localhost:5000/assets/uploads/" + profilePicture}
+                        src={`${import.meta.env.VITE_URBANNEST_API}/assets/uploads/` + profilePicture}
                         alt="profile photo"
                         className="m-4 my-4 shadow-sm"
                         style={{

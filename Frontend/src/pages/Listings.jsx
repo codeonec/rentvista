@@ -13,7 +13,7 @@ const Listings = () => {
     useEffect(() => {
         const getListings = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/listing/get/all-listings/`);
+                const response = await fetch(`${import.meta.env.VITE_URBANNEST_API}/listing/get/all-listings/`);
 
                 if (!response.ok) {
                     throw new Error('Failed to fetch user listings');

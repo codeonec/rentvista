@@ -23,7 +23,7 @@ const AdminLogin = () => {
 
         try {
             setLoading(true);
-            const response = await fetch("http://localhost:5000/admin/login", {
+            const response = await fetch(`${import.meta.env.VITE_URBANNEST_API}/admin/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

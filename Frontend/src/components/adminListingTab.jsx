@@ -26,7 +26,7 @@ const AdminListingTab = () => {
         setError("");
         try {
             const response = await fetch(
-                "http://localhost:5000/admin/listings",
+                `${import.meta.env.VITE_URBANNEST_API}/admin/listings`,
                 {
                     headers: {
                         Authorization: adminToken,
@@ -64,7 +64,7 @@ const AdminListingTab = () => {
         setError("");
         try {
             const response = await fetch(
-                `http://localhost:5000/admin/listings/${selectedListing._id}`,
+                `${import.meta.env.VITE_URBANNEST_API}/admin/listings/${selectedListing._id}`,
                 {
                     method: "PUT",
                     headers: {
@@ -94,7 +94,7 @@ const AdminListingTab = () => {
         setError("");
         try {
             const response = await fetch(
-                `http://localhost:5000/admin/listings/${id}`,
+                `${import.meta.env.VITE_URBANNEST_API}/admin/listings/${id}`,
                 {
                     method: "DELETE",
                     headers: {
@@ -191,7 +191,7 @@ const AdminListingTab = () => {
                                             (img, i) => (
                                                 <Col key={i}>
                                                     <img
-                                                        src={`http://localhost:5000/assets/listings/${img}`}
+                                                        src={`${import.meta.env.VITE_URBANNEST_API}/assets/listings/${img}`}
                                                         style={{
                                                             objectFit: "cover",
                                                             height: "200px",

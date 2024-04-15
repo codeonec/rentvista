@@ -9,7 +9,7 @@ const ListingComponent = ({ listing }) => {
                 <Card className="h-100 cursor-pointer">
                     <Card.Img
                         variant="top"
-                        src={"http://localhost:5000/assets/listings/" + (listing.imageUrls[0])}
+                        src={`${import.meta.env.VITE_URBANNEST_API}/assets/listings/` + (listing.imageUrls[0])}
                         alt={listing.title}
                         style={{
                             objectFit: "cover",

@@ -21,7 +21,7 @@ const IndividualListing = () => {
             try {
                 setIsLoading(true);
                 const response = await fetch(
-                    `http://localhost:5000/listing/get/${params.id}`
+                    `${import.meta.env.VITE_URBANNEST_API}/listing/get/${params.id}`
                 );
 
                 if (!response.ok) {
@@ -43,7 +43,7 @@ const IndividualListing = () => {
         const fetchUser = async () => {
             try {
                 if (listing?.userRef) {
-                    const response = await fetch(`http://localhost:5000/user/${listing?.userRef}`);
+                    const response = await fetch(`${import.meta.env.VITE_URBANNEST_API}/user/${listing?.userRef}`);
 
                     if (!response.ok) {
                         throw new Error("Something went wrong");
@@ -81,7 +81,7 @@ const IndividualListing = () => {
                                 borderRadius: "10px",
                                 objectFit: "cover",
                             }}
-                            src={`http://localhost:5000/assets/listings/${image}`}
+                            src={`${import.meta.env.VITE_URBANNEST_API}/assets/listings/${image}`}
                             alt={image}
                         />
                     </Carousel.Item>
@@ -207,7 +207,7 @@ const IndividualListing = () => {
                         <div className="mx-2 my-3">
                             <div className="d-flex gap-3 align-items-center">
                                 <img
-                                    src={"http://localhost:5000/assets/uploads/" + listedBy?.profilePicture}
+                                    src={`${import.meta.env.VITE_URBANNEST_API}/assets/uploads/` + listedBy?.profilePicture}
                                     alt="profile photo"
                                     className="shadow-sm"
                                     style={{

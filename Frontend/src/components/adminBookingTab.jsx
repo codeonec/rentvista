@@ -34,7 +34,7 @@ const AdminBookingTab = () => {
     const handleDelete = async (bookingId) => {
         try {
             const response = await fetch(
-                `http://localhost:5000/admin/bookings/${bookingId}`,
+                `${import.meta.env.VITE_URBANNEST_API}/admin/bookings/${bookingId}`,
                 {
                     method: "DELETE",
                     headers: {
@@ -60,7 +60,7 @@ const AdminBookingTab = () => {
     const handleSaveChanges = async () => {
         try {
             const response = await fetch(
-                `http://localhost:5000/admin/bookings/${selectedBooking._id}`,
+                `${import.meta.env.VITE_URBANNEST_API}/admin/bookings/${selectedBooking._id}`,
                 {
                     method: "PUT",
                     headers: {
@@ -95,7 +95,7 @@ const AdminBookingTab = () => {
         setError("");
         try {
             const response = await fetch(
-                "http://localhost:5000/admin/bookings",
+                `${import.meta.env.VITE_URBANNEST_API}/admin/bookings`,
                 {
                     headers: {
                         Authorization: adminToken,

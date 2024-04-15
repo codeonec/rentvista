@@ -17,7 +17,7 @@ const NewLogin = () => {
     const loginUser = async (values) => {
         try {
             setLoading(true);
-            const response = await fetch("http://localhost:5000/user/login", {
+            const response = await fetch(`${import.meta.env.VITE_URBANNEST_API}/user/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

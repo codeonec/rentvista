@@ -80,7 +80,7 @@ const Navigation = () => {
                         {`${currentUser.firstname} ${currentUser.lastname}`}
                         <img
                             src={
-                                "http://localhost:5000/assets/uploads/" +
+                                `${import.meta.env.VITE_URBANNEST_API}/assets/uploads/` +
                                 currentUser.profilePicture
                             }
                             alt="profile picture"

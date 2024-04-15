@@ -33,7 +33,7 @@ const AdminUserTab = () => {
 
     const fetchUsers = async () => {
         try {
-            const response = await fetch("http://localhost:5000/admin/users", {
+            const response = await fetch(`${import.meta.env.VITE_URBANNEST_API}/admin/users`, {
                 headers: {
                     Authorization: adminToken,
                     "Content-Type": "application/json",
@@ -58,7 +58,7 @@ const AdminUserTab = () => {
         setLoading(true);
         try {
             const response = await fetch(
-                `http://localhost:5000/admin/users/${selectedUser._id}`,
+                `${import.meta.env.VITE_URBANNEST_API}/admin/users/${selectedUser._id}`,
                 {
                     method: "PUT",
                     headers: {
@@ -86,7 +86,7 @@ const AdminUserTab = () => {
 
     const handleDeleteUser = async (user) => {
         try {
-            const response = await fetch(`http://localhost:5000/admin/users/${user._id}`, {
+            const response = await fetch(`${import.meta.env.VITE_URBANNEST_API}/admin/users/${user._id}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: adminToken,

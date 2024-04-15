@@ -12,7 +12,7 @@ const ForgotPasswordForm = () => {
         try {
             // Send a request to the backend to handle the forgot password logic
             const response = await fetch(
-                "http://localhost:5000/user/forgot-password",
+                `${import.meta.env.VITE_URBANNEST_API}/user/forgot-password`,
                 {
                     method: "POST",
                     headers: {

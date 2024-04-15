@@ -39,7 +39,7 @@ const EditProfile = () => {
         try {
             if (authToken) {
                 setLoading(true);
-                const response = await fetch(`http://localhost:5000/user/auth/edit-profile`, {
+                const response = await fetch(`${import.meta.env.VITE_URBANNEST_API}/user/auth/edit-profile`, {
                     method: "POST",
                     headers: {
                         authorization: `Bearer ${authToken}`,

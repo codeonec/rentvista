@@ -14,7 +14,7 @@ const MyListings = () => {
             const token = JSON.parse(localStorage.getItem("token"));
 
             try {
-                const response = await fetch(`http://localhost:5000/listing/auth/get/user-listings/${currentUser._id}`, {
+                const response = await fetch(`${import.meta.env.VITE_URBANNEST_API}/listing/auth/get/user-listings/${currentUser._id}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json'

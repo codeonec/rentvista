@@ -13,7 +13,7 @@ const ResetPasswordPage = () => {
         e.preventDefault();
         try {
             const response = await fetch(
-                "http://localhost:5000/user/reset-password",
+                `${import.meta.env.VITE_URBANNEST_API}/user/reset-password`,
                 {
                     method: "POST",
                     headers: {

@@ -30,12 +30,12 @@ const UpdateListing = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
-    const listingImageUrl = "http://localhost:5000/assets/listings/";
+    const listingImageUrl = `${import.meta.env.VITE_URBANNEST_API}/assets/listings/`;
 
     useEffect(() => {
         const fetchListing = async () => {
             const listingId = params.id;
-            const res = await fetch(`http://localhost:5000/listing/get/${listingId}`);
+            const res = await fetch(`${import.meta.env.VITE_URBANNEST_API}/listing/get/${listingId}`);
             const data = await res.json();
 
             setFormData(data);
@@ -132,7 +132,7 @@ const UpdateListing = () => {
                 setError('');
                 setLoading(true);
 
-                const response = await fetch(`http://localhost:5000/listing/auth/update-listing/${params.id}`, {
+                const response = await fetch(`${import.meta.env.VITE_URBANNEST_API}/listing/auth/update-listing/${params.id}`, {
                     method: 'PUT',
                     headers: {
                         authorization: `Bearer ${authToken}`,

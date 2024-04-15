@@ -107,7 +107,7 @@ const CreateListing = () => {
                 setError("");
                 setLoading(true);
 
-                fetch('http://localhost:5000/listing/auth/create', {
+                fetch(`${import.meta.env.VITE_URBANNEST_API}/listing/auth/create`, {
                     method: 'POST',
                     headers: {
                         authorization: `Bearer ${authToken}`,

@@ -17,7 +17,7 @@ const BookingModal = ({ showModal, onCloseModal, listingId }) => {
     const fetchAvailableDates = async () => {
         try {
             const response = await fetch(
-                `http://localhost:5000/booking/availability/${listingId}`,
+                `${import.meta.env.VITE_URBANNEST_API}/booking/availability/${listingId}`,
                 {
                     method: "Get",
                     headers: {
@@ -39,7 +39,7 @@ const BookingModal = ({ showModal, onCloseModal, listingId }) => {
         );
 
         const response = await fetch(
-            "http://localhost:5000/booking/create-checkout-session",
+            `${import.meta.env.VITE_URBANNEST_API}/booking/create-checkout-session`,
             {
                 method: "POST",
                 headers: {
@@ -75,7 +75,7 @@ const BookingModal = ({ showModal, onCloseModal, listingId }) => {
         try {
             makePayment();
 
-            const response = await fetch("http://localhost:5000/booking/new/", {
+            const response = await fetch(`${import.meta.env.VITE_URBANNEST_API}/booking/new/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

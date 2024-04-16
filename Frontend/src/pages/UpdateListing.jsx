@@ -152,7 +152,7 @@ const UpdateListing = () => {
                 // Assuming imageRef is a ref to the input element for file upload
                 imageRef.current.value = null;
 
-                navigate(`/listings`);
+                navigate(`/listing/${params.id}`);
             } catch (error) {
                 console.log(error);
                 setLoading(false);

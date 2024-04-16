@@ -121,8 +121,10 @@ router.post("/create-checkout-session", async (req, res) => {
             payment_method_types: ["card"],
             line_items: lineItems,
             mode: "payment",
-            success_url: `http://127.0.0.1:5173/success`,
-            cancel_url: `http://127.0.0.1:5173/cancel`,
+            success_url: `https://urbannest.vercel.app/success`,
+            cancel_url: `https://urbannest.vercel.app/cancel`,
+            // success_url: `http://127.0.0.1:5173/success`,
+            // cancel_url: `http://127.0.0.1:5173/cancel`,
         });
 
         // Send the session ID back to the client

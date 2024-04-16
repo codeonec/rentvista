@@ -41,18 +41,12 @@ const Navigation = () => {
     const AdminLinks = () => {
         return (
             <Dropdown>
-                <Dropdown.Toggle
-                    variant="light"
-                    id="dropdown-basic"
-                >
+                <Dropdown.Toggle variant="light" id="dropdown-basic">
                     UrbenNest Admin
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                    <Dropdown.Item
-                        as={Link}
-                        to="/admin-dashboard"
-                    >
+                    <Dropdown.Item as={Link} to="/admin-dashboard">
                         Dashboard
                     </Dropdown.Item>
                     <Dropdown.Item
@@ -64,8 +58,8 @@ const Navigation = () => {
                     </Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
-        )
-    }
+        );
+    };
 
     const UserLinks = () => {
         return (
@@ -73,15 +67,13 @@ const Navigation = () => {
                 {/* <Link to="/my-bookings" className="nav-link">Bookings</Link> */}
 
                 <Dropdown>
-                    <Dropdown.Toggle
-                        variant="light"
-                        id="dropdown-basic"
-                    >
+                    <Dropdown.Toggle variant="light" id="dropdown-basic">
                         {`${currentUser.firstname} ${currentUser.lastname}`}
                         <img
                             src={
-                                `${import.meta.env.VITE_URBANNEST_API}/assets/uploads/` +
-                                currentUser.profilePicture
+                                `${
+                                    import.meta.env.VITE_URBANNEST_API
+                                }/assets/uploads/` + currentUser.profilePicture
                             }
                             alt="profile picture"
                             width="32px"
@@ -100,14 +92,15 @@ const Navigation = () => {
                         <Dropdown.Item as={Link} to="/profile">
                             Profile
                         </Dropdown.Item>
-                        <Dropdown.Item
-                            as={Link}
-                            to="/create-listing"
-                        >
+                        <Dropdown.Item as={Link} to="/create-listing">
                             Create Listing
                         </Dropdown.Item>
-                        <Dropdown.Item as={Link} to="/my-listings">My Listings</Dropdown.Item>
-                        <Dropdown.Item as={Link} to="/my-bookings">My Bookings</Dropdown.Item>
+                        <Dropdown.Item as={Link} to="/my-listings">
+                            My Listings
+                        </Dropdown.Item>
+                        <Dropdown.Item as={Link} to="/my-bookings">
+                            My Bookings
+                        </Dropdown.Item>
 
                         <Dropdown.Item as={Link} to="/contact-us">
                             Contact Us
@@ -122,18 +115,20 @@ const Navigation = () => {
                     </Dropdown.Menu>
                 </Dropdown>
             </div>
-        )
-    }
+        );
+    };
 
     return (
-        <Navbar
-            expand="lg"
-            className="bg-body-tertiary shadow-sm"
-            sticky="top"
-        >
+        <Navbar expand="lg" className="bg-body-tertiary shadow-sm" sticky="top">
             <Container>
                 <Link to="/" className="navbar-brand">
-                    <img src={LOGO} width="170px" height="40px" alt="UrbanNest" className="m-1" />
+                    <img
+                        src={LOGO}
+                        width="170px"
+                        height="40px"
+                        alt="UrbanNest"
+                        className="m-1"
+                    />
                 </Link>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse
@@ -149,22 +144,32 @@ const Navigation = () => {
                         />
                     </Form>
                     <Nav>
-                        <Link to="/listings/sell" className="nav-link">For Sell</Link>
-                        <Link to="/listings/rent" className="nav-link">For Rent</Link>
+                        <Link to="/listings/sell" className="nav-link">
+                            For Sell
+                        </Link>
+                        <Link to="/listings/rent" className="nav-link">
+                            For Rent
+                        </Link>
 
-                        {adminToken
-                            ? <AdminLinks />
-                            : isLoggedIn
-                                ? <UserLinks />
-                                : <Link to="/login" className="nav-link">
+                        {adminToken ? (
+                            <AdminLinks />
+                        ) : isLoggedIn ? (
+                            <UserLinks />
+                        ) : (
+                            <>
+                                <Link to="/login" className="nav-link">
                                     Login
                                 </Link>
-                        }
-                    </Nav >
-                </Navbar.Collapse >
-            </Container >
-        </Navbar >
+                                <Link to="/admin-login" className="nav-link">
+                                    Admin Login
+                                </Link>
+                            </>
+                        )}
+                    </Nav>
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
     );
-}
+};
 
 export default Navigation;

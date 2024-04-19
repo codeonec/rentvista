@@ -140,7 +140,7 @@ const NewLogin = () => {
                         >
                             {loading
                                 ? "Loading..."
-                                : "Login Test Credential"
+                                : "Guest Login"
                             }
                         </Button>
 

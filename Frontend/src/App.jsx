@@ -22,6 +22,7 @@ import MyBookings from "./pages/MyBookings";
 import Footer from "./components/Footer";
 import Success from "./pages/Success";
 import Cancel from "./pages/Cancel";
+import SearchPage from "./pages/SearchPage";
 
 function App() {
     return (
@@ -123,6 +124,7 @@ function App() {
                         </AdminRoute>
                     }
                 />
+                <Route path="/search" element={<SearchPage />} />
                 <Route path="*" element={<PageNotFound />} />
             </Routes>
             <Footer />

@@ -7,6 +7,7 @@ import FormControl from "react-bootstrap/FormControl";
 import LOGO from "../assets/images/logo.png";
 import { useLogin } from "../contexts/login-context";
 import { Dropdown } from "react-bootstrap";
+import { useState } from "react";
 
 const Navigation = () => {
     const {
@@ -71,8 +72,7 @@ const Navigation = () => {
                         {`${currentUser.firstname} ${currentUser.lastname}`}
                         <img
                             src={
-                                `${
-                                    import.meta.env.VITE_URBANNEST_API
+                                `${import.meta.env.VITE_URBANNEST_API
                                 }/assets/uploads/` + currentUser.profilePicture
                             }
                             alt="profile picture"
@@ -118,6 +118,19 @@ const Navigation = () => {
         );
     };
 
+    const [query, setQuery] = useState('');
+
+    const handleInputChange = event => {
+        setQuery(event.target.value);
+    };
+
+    const handleKeyPress = event => {
+        if (event.key === 'Enter') {
+            navigate(`/search?type=${encodeURIComponent('all')}&query=${encodeURIComponent(query)}`);
+            event.preventDefault();
+        }
+    };
+
     return (
         <Navbar expand="lg" className="bg-body-tertiary shadow-sm" sticky="top">
             <Container>
@@ -141,6 +154,9 @@ const Navigation = () => {
                             placeholder="Search"
                             className="mr-2"
                             aria-label="Search"
+                            value={query}
+                            onChange={handleInputChange}
+                            onKeyDown={handleKeyPress}
                         />
                     </Form>
                     <Nav>

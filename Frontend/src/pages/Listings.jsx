@@ -39,7 +39,7 @@ const Listings = () => {
     }
 
     const typeListings = listings
-        .filter(listing => listing.type === type);
+        .filter(listing => listing?.type === type);
 
     return (
         <Container className="my-3">

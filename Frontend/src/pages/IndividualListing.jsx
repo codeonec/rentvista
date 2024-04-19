@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Container, Carousel, Row, Col, Button } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import Loading from "../components/Loading";
-import { FaChair, FaHeart, FaLocationDot, FaDumbbell } from "react-icons/fa6";
+import { FaChair, FaLocationDot, FaDumbbell } from "react-icons/fa6";
 import { FaBed, FaBath, FaParking } from "react-icons/fa";
 import { useLogin } from "../contexts/login-context";
 import BookingModal from "../components/bookingModal";
@@ -124,10 +124,6 @@ const IndividualListing = () => {
                                     )}
                                 </span>
                             }
-
-                            <Button>
-                                Save <FaHeart />
-                            </Button>
 
                             <BookingModal
                                 showModal={showBookingModal}

@@ -41,7 +41,10 @@ const SearchPage = () => {
 
     return (
         <Container className='p-3'>
-            <h5>Search Results for "{searchQuery}"</h5>
+            {searchQuery === ""
+                ? <h5>Showing all available listings ({listings.length})</h5>
+                : <h5>Search Results for "{searchQuery}" ({listings.length})</h5>
+            }
             {isLoading ? (
                 <p>Loading...</p>
             ) : error ? (

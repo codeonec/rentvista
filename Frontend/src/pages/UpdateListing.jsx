@@ -325,7 +325,7 @@ const UpdateListing = () => {
                     <Button
                         type="submit"
                         onSubmit={handleSubmit}
-                        variant='success'
+                        variant='primary'
                         disabled={loading}
                     >
                         {loading ? "Updating..." : "Update Listing"}
